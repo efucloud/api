@@ -1,0 +1,118 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: (devel)
+  creationTimestamp: null
+  name: workspacedashboards.monitor.efucloud.com
+spec:
+  group: monitor.efucloud.com
+  names:
+    kind: WorkspaceDashboard
+    listKind: WorkspaceDashboardList
+    plural: workspacedashboards
+    singular: workspacedashboard
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.clusterRef
+      name: ClusterRef
+      type: string
+    - jsonPath: .status.namespaceNumber
+      name: NamespaceNumber
+      type: integer
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: WorkspaceDashboard  Workspace information
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            properties:
+              metrics:
+                description: agent will get metrics from prometheus, item is builtin
+                  promql
+                items:
+                  properties:
+                    name:
+                      type: string
+                    promql:
+                      type: string
+                    valueType:
+                      type: string
+                    valueUnit:
+                      type: string
+                  required:
+                  - name
+                  - promql
+                  - valueType
+                  - valueUnit
+                  type: object
+                type: array
+            required:
+            - metrics
+            type: object
+          status:
+            properties:
+              lastReportTime:
+                description: agent last report time
+                format: date-time
+                type: string
+              meters:
+                description: meters
+                items:
+                  properties:
+                    category:
+                      type: string
+                    name:
+                      type: string
+                    namespace:
+                      type: string
+                  required:
+                  - category
+                  - name
+                  - namespace
+                  type: object
+                type: array
+              metrics:
+                items:
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: string
+                    unit:
+                      type: string
+                    value:
+                      type: string
+                  required:
+                  - name
+                  - type
+                  - unit
+                  - value
+                  type: object
+                type: array
+              namespaceNumber:
+                description: workspace namespace number, agent will report this information
+                format: int32
+                type: integer
+            required:
+            - meters
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

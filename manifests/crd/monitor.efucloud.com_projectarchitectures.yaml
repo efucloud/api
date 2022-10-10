@@ -1,0 +1,317 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: (devel)
+  creationTimestamp: null
+  name: projectarchitectures.monitor.efucloud.com
+spec:
+  group: monitor.efucloud.com
+  names:
+    kind: ProjectArchitecture
+    listKind: ProjectArchitectureList
+    plural: projectarchitectures
+    singular: projectarchitecture
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ProjectArchitecture is the Schema for the projectarchitectures
+          API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ProjectArchitectureSpec defines the desired state of ProjectArchitecture
+            properties:
+              description:
+                description: Project Description
+                type: string
+              prometheusInformation:
+                additionalProperties:
+                  properties:
+                    address:
+                      description: prometheus
+                      type: string
+                    configMapKeyRef:
+                      description: Selects a key of a ConfigMap.
+                      properties:
+                        key:
+                          description: The key to select.
+                          type: string
+                        name:
+                          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                            TODO: Add other useful fields. apiVersion, kind, uid?'
+                          type: string
+                        optional:
+                          description: Specify whether the ConfigMap or its key must
+                            be defined
+                          type: boolean
+                      required:
+                      - key
+                      type: object
+                    secretKeyRef:
+                      description: Selects a key of a secret in the pod's namespace
+                      properties:
+                        key:
+                          description: The key of the secret to select from.  Must
+                            be a valid secret key.
+                          type: string
+                        name:
+                          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                            TODO: Add other useful fields. apiVersion, kind, uid?'
+                          type: string
+                        optional:
+                          description: Specify whether the Secret or its key must
+                            be defined
+                          type: boolean
+                      required:
+                      - key
+                      type: object
+                    token:
+                      default: /var/run/secrets/kubernetes.io/serviceaccount/token
+                      description: prometheus token path or value, defult is pod sa
+                        token path
+                      type: string
+                  type: object
+                description: project's metrics prometheus information
+                type: object
+              scrapeInterval:
+                description: metrics scrape interval
+                type: string
+              scrapeLength:
+                default: 3600
+                description: metrics scrape length, default one hour
+                format: int64
+                type: integer
+              services:
+                additionalProperties:
+                  description: Project service
+                  properties:
+                    annotations:
+                      additionalProperties:
+                        type: string
+                      description: annotations
+                      type: object
+                    category:
+                      description: Service type
+                      enum:
+                      - frontend
+                      - backend
+                      - database
+                      - middleware
+                      type: string
+                    description:
+                      description: service description
+                      type: string
+                    icon:
+                      description: frontend icon display
+                      type: string
+                    name:
+                      description: Service Name
+                      type: string
+                    projectServiceItems:
+                      additionalProperties:
+                        properties:
+                          annotations:
+                            additionalProperties:
+                              type: string
+                            description: annotations
+                            type: object
+                          deployPath:
+                            description: 'DeployPath if server deployed in same namespace
+                              with ProjectArchitecture instance, deployPath is kind
+                              eg: [Deployment] if service deployed in cluster other
+                              namespace, name has prefix with ClusterNamespace., eg:
+                              ClusterNamespace.[default].[Deployment] if server deployed
+                              in other cluster''s namespace, name has External with
+                              ExternalClusterNamespace, eg: ExternalClusterNamespace.[clustercode].[default].[Deployment]
+                              if server is deployed in other system, name has prefix
+                              External. ,eg: External'
+                            type: string
+                          description:
+                            description: service description
+                            type: string
+                          metrics:
+                            description: metrics
+                            items:
+                              properties:
+                                description:
+                                  description: metrics description
+                                  type: string
+                                name:
+                                  description: metrics name
+                                  type: string
+                                promQl:
+                                  description: Metrics PromQL
+                                  type: string
+                                prometheusRef:
+                                  description: prometheus relation information
+                                  type: string
+                                queryType:
+                                  default: query
+                                  description: Query Type
+                                  enum:
+                                  - query
+                                  - query_range
+                                  type: string
+                                unit:
+                                  description: Metrics Unit
+                                  type: string
+                              type: object
+                            type: array
+                          name:
+                            description: Service Name
+                            type: string
+                          serviceRelations:
+                            description: service relation
+                            items:
+                              properties:
+                                annotations:
+                                  additionalProperties:
+                                    type: string
+                                  description: annotations
+                                  type: object
+                                description:
+                                  type: string
+                                port:
+                                  description: The port that will be exposed by this
+                                    service.
+                                  format: int32
+                                  type: integer
+                                protocol:
+                                  default: TCP
+                                  description: The IP protocol for this port. Supports
+                                    "TCP", "UDP", and "SCTP". Default is TCP.
+                                  enum:
+                                  - TCP
+                                  - UDP
+                                  - SCTP
+                                  type: string
+                                targetRef:
+                                  description: Project Service Name
+                                  type: string
+                                targetVersion:
+                                  description: target service version
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      description: service item,map key is service version
+                      type: object
+                  type: object
+                description: Project's services relation, key is service name
+                type: object
+            type: object
+          status:
+            description: ProjectArchitectureStatus defines the observed state of ProjectArchitecture
+            properties:
+              hash:
+                description: 'INSERT ADDITIONAL STATUS FIELD - define observed state
+                  of cluster Important: Run "make" to regenerate code after modifying
+                  this file'
+                type: string
+              prometheusStatus:
+                additionalProperties:
+                  type: string
+                description: prometheus health check
+                type: object
+              service:
+                additionalProperties:
+                  description: ServiceMetricsStatus defines project service diff versions
+                  properties:
+                    items:
+                      additionalProperties:
+                        description: ServiceItemStatus one service version metrics
+                        properties:
+                          metrics:
+                            additionalProperties:
+                              properties:
+                                description:
+                                  description: metrics description
+                                  type: string
+                                error:
+                                  description: prometheus response error
+                                  type: string
+                                name:
+                                  description: metrics name
+                                  type: string
+                                prometheus:
+                                  description: prometheus address
+                                  type: string
+                                queryType:
+                                  default: query
+                                  description: Query Type
+                                  enum:
+                                  - query
+                                  - query_range
+                                  type: string
+                                unit:
+                                  description: Metrics Unit
+                                  type: string
+                                vectorData:
+                                  description: metrics data
+                                  items:
+                                    properties:
+                                      metric:
+                                        additionalProperties:
+                                          type: string
+                                        type: object
+                                      value:
+                                        properties:
+                                          timestamp:
+                                            format: int64
+                                            type: integer
+                                          value:
+                                            type: string
+                                        type: object
+                                    type: object
+                                  type: array
+                                vectorMatrix:
+                                  items:
+                                    properties:
+                                      metric:
+                                        additionalProperties:
+                                          type: string
+                                        type: object
+                                      values:
+                                        items:
+                                          properties:
+                                            timestamp:
+                                              format: int64
+                                              type: integer
+                                            value:
+                                              type: string
+                                          type: object
+                                        type: array
+                                    type: object
+                                  type: array
+                              type: object
+                            description: key is metrics name
+                            type: object
+                        type: object
+                      description: key is service version
+                      type: object
+                  type: object
+                description: project service, key is service name
+                type: object
+              timestamp:
+                description: scrape timestamp
+                format: int64
+                type: integer
+            type: object
+        type: object
+    served: true
+    storage: true
