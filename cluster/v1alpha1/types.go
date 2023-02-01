@@ -60,15 +60,17 @@ type ClusterSpec struct {
 	// cluster category, such as: Strict、NonStrict、Dev、Test、Pro
 	// +kubebuilder:validation:Required
 	Category string `json:"category" yaml:"category" protobuf:"bytes,3,opt,name=category"`
+	// authenticated by EAuth
+	AuthenticatedByEAuth bool `json:"authenticatedByEAuth" yaml:"authenticatedByEAuth" protobuf:"varint,4,opt,name=authenticatedByEAuth"`
 	// cluster region
 	// +optional
-	Region string `json:"region" yaml:"region" protobuf:"bytes,4,opt,name=region"`
+	Region string `json:"region" yaml:"region" protobuf:"bytes,5,opt,name=region"`
 	//  cluster description
 	// +optional
-	Description string `json:"description" yaml:"description" protobuf:"bytes,5,opt,name=description"`
+	Description string `json:"description" yaml:"description" protobuf:"bytes,6,opt,name=description"`
 	// cluster master url
 	// +kubebuilder:validation:Required
-	Master string `json:"master" yaml:"master" protobuf:"bytes,6,opt,name=master"`
+	Master string `json:"master" yaml:"master" protobuf:"bytes,7,opt,name=master"`
 	// cluster's user or serviceaccount token
 	// +optional
 	Token string `json:"token" yaml:"token" protobuf:"bytes,8,opt,name=token"`

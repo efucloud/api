@@ -57,43 +57,6 @@ type WorkspaceRoleList struct {
 }
 
 // +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +genclient:nonNamespaced
-// +kubebuilder:resource:scope=Cluster
-
-type KubeUserAPIKey struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Spec              KubeUserAPIKeySpec   `json:"spec,omitempty" yaml:"spec" protobuf:"bytes,2,opt,name=spec"`
-	Status            KubeUserAPIKeyStatus `json:"status" yaml:"status" protobuf:"bytes,3,opt,name=status"`
-}
-type KubeUserAPIKeySpec struct {
-	// relate user
-	// +kubebuilder:validation:Required
-	UserRef string `json:"userRef" yaml:"userRef" protobuf:"bytes,1,opt,name=userRef"`
-	// +optional
-	Key string `json:"key" yaml:"key" protobuf:"bytes,2,opt,name=key"`
-	// +optional
-	Secret string `json:"secret" yaml:"secret" protobuf:"bytes,3,opt,name=secret"`
-	// +optional
-	Enable string `json:"enable" yaml:"enable" protobuf:"bytes,4,opt,name=enable"`
-	// expired time, if nil will not expire
-	// +optional
-	Expired *metav1.Time `json:"expired" yaml:"expired" protobuf:"bytes,5,opt,name=expired"`
-}
-type KubeUserAPIKeyStatus struct {
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// KubeUserAPIKeyList contains a list of KubeUserAPIKey
-type KubeUserAPIKeyList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Items           []KubeUserAPIKey `json:"items" protobuf:"bytes,2,rep,name=items"`
-}
-
-// +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:subresource:status
@@ -121,12 +84,12 @@ type KubeUserSpec struct {
 	// +kubebuilder:validation:Enum=zh;en
 	// +optional
 	Language string `json:"language" yaml:"language" protobuf:"bytes,3,opt,name=language"`
-	// login password
-	// +optional
-	Password string `json:"password" yaml:"password" protobuf:"bytes,4,opt,name=password"`
 	// user's mobile phone
 	// +optional
-	MobilePhone string `json:"mobilePhone" yaml:"mobilePhone" protobuf:"bytes,5,opt,name=mobilePhone"`
+	Phone string `json:"phone" yaml:"phone" protobuf:"bytes,4,opt,name=phone"`
+	// 是否有效
+	Enable uint     `json:"enable" yaml:"enable" protobuf:"varint,5,opt,name=enable"`
+	Groups []string `json:"groups" yaml:"groups" protobuf:"bytes,6,rep,name=groups"`
 }
 type KubeUserStatus struct {
 	// last login time

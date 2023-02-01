@@ -52,22 +52,28 @@ spec:
               email:
                 description: user email
                 type: string
+              enable:
+                description: 是否有效
+                type: integer
+              groups:
+                items:
+                  type: string
+                type: array
               language:
                 description: default language
                 enum:
                 - zh
                 - en
                 type: string
-              mobilePhone:
+              phone:
                 description: user's mobile phone
-                type: string
-              password:
-                description: login password
                 type: string
               username:
                 description: username
                 type: string
             required:
+            - enable
+            - groups
             - username
             type: object
           status:

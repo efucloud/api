@@ -125,17 +125,20 @@ message ClusterSpec {
   // +kubebuilder:validation:Required
   optional string category = 3;
 
+  // authenticated by EAuth
+  optional bool authenticatedByEAuth = 4;
+
   // cluster region
   // +optional
-  optional string region = 4;
+  optional string region = 5;
 
   //  cluster description
   // +optional
-  optional string description = 5;
+  optional string description = 6;
 
   // cluster master url
   // +kubebuilder:validation:Required
-  optional string master = 6;
+  optional string master = 7;
 
   // cluster's user or serviceaccount token
   // +optional

@@ -36,43 +36,6 @@ message KubeUser {
   optional KubeUserStatus status = 3;
 }
 
-message KubeUserAPIKey {
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
-
-  optional KubeUserAPIKeySpec spec = 2;
-
-  optional KubeUserAPIKeyStatus status = 3;
-}
-
-// KubeUserAPIKeyList contains a list of KubeUserAPIKey
-message KubeUserAPIKeyList {
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
-
-  repeated KubeUserAPIKey items = 2;
-}
-
-message KubeUserAPIKeySpec {
-  // relate user
-  // +kubebuilder:validation:Required
-  optional string userRef = 1;
-
-  // +optional
-  optional string key = 2;
-
-  // +optional
-  optional string secret = 3;
-
-  // +optional
-  optional string enable = 4;
-
-  // expired time, if nil will not expire
-  // +optional
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.Time expired = 5;
-}
-
-message KubeUserAPIKeyStatus {
-}
-
 // KubeUserList contains a list of KubeUser
 message KubeUserList {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
@@ -94,13 +57,14 @@ message KubeUserSpec {
   // +optional
   optional string language = 3;
 
-  // login password
-  // +optional
-  optional string password = 4;
-
   // user's mobile phone
   // +optional
-  optional string mobilePhone = 5;
+  optional string phone = 4;
+
+  // 是否有效
+  optional uint64 enable = 5;
+
+  repeated string groups = 6;
 }
 
 message KubeUserStatus {
