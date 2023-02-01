@@ -34,6 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
+        description: KubeUser luffy user and name's suffix is eauth account id
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -54,7 +55,7 @@ spec:
                 type: string
               enable:
                 description: 是否有效
-                type: integer
+                type: boolean
               groups:
                 items:
                   type: string
@@ -78,10 +79,6 @@ spec:
             type: object
           status:
             properties:
-              enable:
-                default: true
-                description: if available is false, user will not login system
-                type: boolean
               lastLoginTime:
                 description: last login time
                 format: date-time
@@ -89,11 +86,13 @@ spec:
               lastRemoteIp:
                 description: last login remote ip
                 type: string
-              passwordEncrypt:
-                description: etcd only save password with encrypt
-                type: string
+              workspaces:
+                description: which workspace belongs to
+                items:
+                  type: string
+                type: array
             required:
-            - enable
+            - workspaces
             type: object
         type: object
     served: true

@@ -28,6 +28,7 @@ import "k8s.io/apimachinery/pkg/runtime/schema/generated.proto";
 // Package-wide variables from generator "generated".
 option go_package = "github.com/efucloud/api/rbac/v1alpha1";
 
+// KubeUser luffy user and name's suffix is eauth account id
 message KubeUser {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
 
@@ -62,7 +63,7 @@ message KubeUserSpec {
   optional string phone = 4;
 
   // 是否有效
-  optional uint64 enable = 5;
+  optional bool enable = 5;
 
   repeated string groups = 6;
 }
@@ -76,13 +77,8 @@ message KubeUserStatus {
   // +optional
   optional string lastRemoteIp = 2;
 
-  // if available is false, user will not login system
-  // +kubebuilder:default:=true
-  optional bool enable = 3;
-
-  // etcd only save password with encrypt
-  // +optional
-  optional string passwordEncrypt = 4;
+  // which workspace belongs to
+  repeated string workspaces = 3;
 }
 
 // UserKubeConfig is the Schema for the usermanages API

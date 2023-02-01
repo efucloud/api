@@ -48,6 +48,14 @@ spec:
               description:
                 description: workspace description
                 type: string
+              eAuthGroupPrefix:
+                description: eauth group's account with prefix will auto add in workspace
+                type: string
+              eAuthGroups:
+                description: eauth group's account will auto add in workspace
+                items:
+                  type: string
+                type: array
               users:
                 description: workspace users
                 items:
@@ -67,6 +75,8 @@ spec:
             required:
             - code
             - description
+            - eAuthGroupPrefix
+            - eAuthGroups
             type: object
           status:
             description: WorkspaceStatus defines the observed state of Workspace

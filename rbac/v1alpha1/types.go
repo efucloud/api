@@ -67,6 +67,7 @@ type WorkspaceRoleList struct {
 // +kubebuilder:printcolumn:name="LastRemoteIP",type=string,JSONPath=`.status.lastRemoteIP`
 // +kubebuilder:resource:scope=Cluster
 
+//KubeUser luffy user and name's suffix is eauth account id
 type KubeUser struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
@@ -88,7 +89,7 @@ type KubeUserSpec struct {
 	// +optional
 	Phone string `json:"phone" yaml:"phone" protobuf:"bytes,4,opt,name=phone"`
 	// 是否有效
-	Enable uint     `json:"enable" yaml:"enable" protobuf:"varint,5,opt,name=enable"`
+	Enable bool     `json:"enable" yaml:"enable" protobuf:"varint,5,opt,name=enable"`
 	Groups []string `json:"groups" yaml:"groups" protobuf:"bytes,6,rep,name=groups"`
 }
 type KubeUserStatus struct {
@@ -98,12 +99,8 @@ type KubeUserStatus struct {
 	// last login remote ip
 	// +optional
 	LastRemoteIP string `json:"lastRemoteIp" yaml:"lastRemoteIp" protobuf:"bytes,2,opt,name=lastRemoteIp"`
-	// if available is false, user will not login system
-	// +kubebuilder:default:=true
-	Enable bool `json:"enable" yaml:"enable" protobuf:"varint,3,opt,name=enable"`
-	// etcd only save password with encrypt
-	// +optional
-	PasswordEncrypt string `json:"passwordEncrypt" yaml:"passwordEncrypt" protobuf:"bytes,4,opt,name=passwordEncrypt"`
+	// which workspace belongs to
+	Workspaces []string `json:"workspaces" yaml:"workspaces" protobuf:"bytes,3,rep,name=workspaces"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -49,7 +49,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Cluster is the schema for the clusters API
+        description: Cluster cluster
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

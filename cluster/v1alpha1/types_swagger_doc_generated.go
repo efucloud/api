@@ -28,27 +28,11 @@ package v1alpha1
 
 // AUTO-GENERATED FUNCTIONS START HERE
 var map_Cluster = map[string]string{
-	"": "Cluster is the schema for the clusters API",
+	"": "Cluster cluster",
 }
 
 func (Cluster) SwaggerDoc() map[string]string {
 	return map_Cluster
-}
-
-var map_ClusterConfig = map[string]string{
-	"": "ClusterConfig cluster",
-}
-
-func (ClusterConfig) SwaggerDoc() map[string]string {
-	return map_ClusterConfig
-}
-
-var map_ClusterConfigList = map[string]string{
-	"": "ClusterConfigList contains a list of Config",
-}
-
-func (ClusterConfigList) SwaggerDoc() map[string]string {
-	return map_ClusterConfigList
 }
 
 var map_ClusterProfile = map[string]string{
@@ -148,9 +132,11 @@ func (WorkspaceResourceQuotaSpec) SwaggerDoc() map[string]string {
 }
 
 var map_WorkspaceSpec = map[string]string{
-	"code":        "workspace code",
-	"description": "workspace description",
-	"users":       "workspace users",
+	"code":             "workspace code",
+	"eAuthGroups":      "eauth group's account will auto add in workspace",
+	"eAuthGroupPrefix": "eauth group's account with prefix will auto add in workspace",
+	"description":      "workspace description",
+	"users":            "workspace users",
 }
 
 func (WorkspaceSpec) SwaggerDoc() map[string]string {

@@ -115,6 +115,11 @@ func (in *KubeUserStatus) DeepCopyInto(out *KubeUserStatus) {
 		in, out := &in.LastLoginTime, &out.LastLoginTime
 		*out = (*in).DeepCopy()
 	}
+	if in.Workspaces != nil {
+		in, out := &in.Workspaces, &out.Workspaces
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
 	return
 }
 

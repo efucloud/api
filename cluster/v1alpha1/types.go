@@ -42,7 +42,7 @@ const (
 // +kubebuilder:printcolumn:name="Region",type=string,JSONPath=`.spec.region`
 // +kubebuilder:resource:scope=Cluster
 
-// Cluster is the schema for the clusters API
+// Cluster cluster
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
@@ -192,14 +192,17 @@ type ClusterProfileList struct {
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-
-	Spec   WorkspaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
-	Status WorkspaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+	Spec              WorkspaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            WorkspaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 type WorkspaceSpec struct {
 	// workspace code
 	// +kubebuilder:validation:Required
 	Code string `json:"code" yaml:"code" protobuf:"bytes,1,opt,name=code"`
+	// eauth group's account will auto add in workspace
+	EAuthGroups []string `json:"eAuthGroups" yaml:"eAuthGroups" protobuf:"bytes,4,rep,name=eAuthGroups"`
+	// eauth group's account with prefix will auto add in workspace
+	EAuthGroupPrefix string `json:"eAuthGroupPrefix" yaml:"eAuthGroupPrefix" protobuf:"bytes,5,opt,name=eAuthGroupPrefix"`
 	// workspace description
 	// +kubebuilder:validation:Required
 	Description string `json:"description" yaml:"description" protobuf:"bytes,2,opt,name=description"`
@@ -229,7 +232,6 @@ type ClusterNamespace struct {
 	// +kubebuilder:validation:Required
 	Cluster string `json:"cluster" yaml:"cluster" protobuf:"bytes,1,opt,name=cluster"`
 	// +kubebuilder:validation:Required
-
 	Namespaces []string `json:"namespaces" yaml:"namespaces" protobuf:"bytes,2,rep,name=namespaces"`
 }
 
@@ -240,40 +242,6 @@ type WorkspaceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	Items           []Workspace `json:"items" protobuf:"bytes,2,rep,name=items"`
-}
-
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:subresource:status
-// +kubebuilder:printcolumn:name="Cluster",type=string,JSONPath=`.metadata.name`
-// +kubebuilder:printcolumn:name="Description",type=string,JSONPath=`.spec.description`
-// +kubebuilder:resource:scope=Cluster
-
-// ClusterConfig cluster
-type ClusterConfig struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Spec              ClusterConfigSpec   `json:"spec" yaml:"spec" protobuf:"bytes,2,opt,name=spec"`
-	Status            ClusterConfigStatus `json:"status" yaml:"status" protobuf:"bytes,3,opt,name=status"`
-}
-type ClusterConfigSpec struct {
-	Description string `json:"description" yaml:"description" protobuf:"bytes,2,opt,name=description"`
-	Data        string `json:"data" yaml:"data" protobuf:"bytes,3,opt,name=data"`
-}
-
-type ClusterConfigStatus struct {
-	Available   bool   `json:"available" yaml:"available" protobuf:"varint,1,opt,name=available"`
-	EncryptData []byte `json:"encryptData" yaml:"encryptData" protobuf:"bytes,2,opt,name=encryptData"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// ClusterConfigList contains a list of Config
-type ClusterConfigList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Items           []ClusterConfig `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
 // +genclient

@@ -30,41 +30,13 @@ import "k8s.io/apimachinery/pkg/runtime/schema/generated.proto";
 // Package-wide variables from generator "generated".
 option go_package = "github.com/efucloud/api/cluster/v1alpha1";
 
-// Cluster is the schema for the clusters API
+// Cluster cluster
 message Cluster {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
 
   optional ClusterSpec spec = 2;
 
   optional ClusterStatus status = 3;
-}
-
-// ClusterConfig cluster
-message ClusterConfig {
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
-
-  optional ClusterConfigSpec spec = 2;
-
-  optional ClusterConfigStatus status = 3;
-}
-
-// ClusterConfigList contains a list of Config
-message ClusterConfigList {
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
-
-  repeated ClusterConfig items = 2;
-}
-
-message ClusterConfigSpec {
-  optional string description = 2;
-
-  optional string data = 3;
-}
-
-message ClusterConfigStatus {
-  optional bool available = 1;
-
-  optional bytes encryptData = 2;
 }
 
 message ClusterList {
@@ -77,6 +49,7 @@ message ClusterNamespace {
   // +kubebuilder:validation:Required
   optional string cluster = 1;
 
+  // +kubebuilder:validation:Required
   repeated string namespaces = 2;
 }
 
@@ -325,6 +298,12 @@ message WorkspaceSpec {
   // workspace code
   // +kubebuilder:validation:Required
   optional string code = 1;
+
+  // eauth group's account will auto add in workspace
+  repeated string eAuthGroups = 4;
+
+  // eauth group's account with prefix will auto add in workspace
+  optional string eAuthGroupPrefix = 5;
 
   // workspace description
   // +kubebuilder:validation:Required
