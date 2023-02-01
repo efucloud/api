@@ -34,8 +34,6 @@ func addLegacyKnownTypes(scheme *runtime.Scheme) error {
 		&WorkspaceRoleList{},
 		&KubeUser{},
 		&KubeUserList{},
-		&KubeUserAPIKey{},
-		&KubeUserAPIKeyList{},
 		&UserKubeConfig{},
 		&UserKubeConfigList{},
 	}

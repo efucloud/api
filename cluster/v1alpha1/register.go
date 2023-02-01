@@ -53,8 +53,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterProfileList{},
 		&Workspace{},
 		&WorkspaceList{},
-		&ClusterConfig{},
-		&ClusterConfigList{},
 		&DeployTemplate{},
 		&DeployTemplateList{},
 	)

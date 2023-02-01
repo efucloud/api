@@ -36,8 +36,6 @@ func addLegacyKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterProfileList{},
 		&Workspace{},
 		&WorkspaceList{},
-		&ClusterConfig{},
-		&ClusterConfigList{},
 		&DeployTemplate{},
 		&DeployTemplateList{},
 	}
