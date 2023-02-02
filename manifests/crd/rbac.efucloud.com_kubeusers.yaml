@@ -53,9 +53,6 @@ spec:
               email:
                 description: user email
                 type: string
-              enable:
-                description: enable
-                type: integer
               groups:
                 items:
                   type: string
@@ -75,7 +72,6 @@ spec:
                 description: username
                 type: string
             required:
-            - enable
             - username
             type: object
           status:

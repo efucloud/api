@@ -62,9 +62,6 @@ message KubeUserSpec {
   // +optional
   optional string phone = 4;
 
-  // enable
-  optional uint64 enable = 5;
-
   // +optional
   repeated string groups = 6;
 

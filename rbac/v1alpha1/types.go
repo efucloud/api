@@ -89,8 +89,6 @@ type KubeUserSpec struct {
 	// user's mobile phone
 	// +optional
 	Phone string `json:"phone" yaml:"phone" protobuf:"bytes,4,opt,name=phone"`
-	// enable
-	Enable uint `json:"enable" yaml:"enable" protobuf:"varint,5,opt,name=enable"`
 	// +optional
 	Groups []string `json:"groups" yaml:"groups" protobuf:"bytes,6,rep,name=groups"`
 	// +optional
