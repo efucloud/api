@@ -48,7 +48,7 @@ var map_KubeUserSpec = map[string]string{
 	"email":    "user email",
 	"language": "default language",
 	"phone":    "user's mobile phone",
-	"enable":   "是否有效",
+	"enable":   "enable",
 }
 
 func (KubeUserSpec) SwaggerDoc() map[string]string {

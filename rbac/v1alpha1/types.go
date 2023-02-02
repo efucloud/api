@@ -78,6 +78,7 @@ type KubeUserSpec struct {
 	// username
 	// +kubebuilder:validation:Required
 	Username string `json:"username" yaml:"username" protobuf:"bytes,1,opt,name=username"`
+
 	// user email
 	// +optional
 	Email string `json:"email" yaml:"email" protobuf:"bytes,2,opt,name=email"`
@@ -88,9 +89,12 @@ type KubeUserSpec struct {
 	// user's mobile phone
 	// +optional
 	Phone string `json:"phone" yaml:"phone" protobuf:"bytes,4,opt,name=phone"`
-	// 是否有效
-	Enable bool     `json:"enable" yaml:"enable" protobuf:"varint,5,opt,name=enable"`
+	// enable
+	Enable uint `json:"enable" yaml:"enable" protobuf:"varint,5,opt,name=enable"`
+	// +optional
 	Groups []string `json:"groups" yaml:"groups" protobuf:"bytes,6,rep,name=groups"`
+	// +optional
+	Nickname string `json:"nickname" yaml:"nickname" protobuf:"bytes,7,opt,name=nickname"`
 }
 type KubeUserStatus struct {
 	// last login time

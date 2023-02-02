@@ -62,10 +62,14 @@ message KubeUserSpec {
   // +optional
   optional string phone = 4;
 
-  // 是否有效
-  optional bool enable = 5;
+  // enable
+  optional uint64 enable = 5;
 
+  // +optional
   repeated string groups = 6;
+
+  // +optional
+  optional string nickname = 7;
 }
 
 message KubeUserStatus {
