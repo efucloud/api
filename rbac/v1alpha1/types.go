@@ -102,6 +102,7 @@ type KubeUserStatus struct {
 	// +optional
 	LastRemoteIP string `json:"lastRemoteIp" yaml:"lastRemoteIp" protobuf:"bytes,2,opt,name=lastRemoteIp"`
 	// which workspace belongs to
+	// +optional
 	Workspaces []string `json:"workspaces" yaml:"workspaces" protobuf:"bytes,3,rep,name=workspaces"`
 }
 

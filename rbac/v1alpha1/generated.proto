@@ -79,6 +79,7 @@ message KubeUserStatus {
   optional string lastRemoteIp = 2;
 
   // which workspace belongs to
+  // +optional
   repeated string workspaces = 3;
 }
 
