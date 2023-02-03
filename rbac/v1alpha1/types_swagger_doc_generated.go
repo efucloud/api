@@ -116,6 +116,14 @@ func (WorkspaceGroup) SwaggerDoc() map[string]string {
 	return map_WorkspaceGroup
 }
 
+var map_WorkspaceGroupList = map[string]string{
+	"": "WorkspaceGroupList contains a list of WorkspaceGroup",
+}
+
+func (WorkspaceGroupList) SwaggerDoc() map[string]string {
+	return map_WorkspaceGroupList
+}
+
 var map_WorkspaceGroupSpec = map[string]string{
 	"workspaceRef":      "workspace ref",
 	"description":       "Description  about workspace role",
@@ -135,7 +143,7 @@ func (WorkspaceRole) SwaggerDoc() map[string]string {
 }
 
 var map_WorkspaceRoleList = map[string]string{
-	"": "WorkspaceRoleList contains a list of Workspace",
+	"": "WorkspaceRoleList contains a list of WorkspaceRole",
 }
 
 func (WorkspaceRoleList) SwaggerDoc() map[string]string {

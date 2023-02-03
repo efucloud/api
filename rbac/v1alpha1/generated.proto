@@ -169,6 +169,13 @@ message WorkspaceGroup {
   optional WorkspaceGroupStatus status = 3;
 }
 
+// WorkspaceGroupList contains a list of WorkspaceGroup
+message WorkspaceGroupList {
+  optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
+
+  repeated WorkspaceGroup items = 2;
+}
+
 message WorkspaceGroupSpec {
   // workspace ref
   optional string workspaceRef = 1;
@@ -194,7 +201,7 @@ message WorkspaceRole {
   optional WorkspaceRoleStatus status = 3;
 }
 
-// WorkspaceRoleList contains a list of Workspace
+// WorkspaceRoleList contains a list of WorkspaceRole
 message WorkspaceRoleList {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
 
