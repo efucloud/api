@@ -37,15 +37,6 @@ spec:
     - jsonPath: .spec.category
       name: Category
       type: string
-    - jsonPath: .status.workspaceNumber
-      name: WorkspaceNumber
-      type: string
-    - jsonPath: .status.namespaceNumber
-      name: NamespaceNumber
-      type: string
-    - jsonPath: .status.nodeNumber
-      name: NodeNumber
-      type: string
     - jsonPath: .status.lastCheck
       name: LastCheck
       type: string
@@ -144,18 +135,10 @@ spec:
               lastCheck:
                 format: date-time
                 type: string
-              namespaceNumber:
-                description: namespace number
-                format: int64
-                type: integer
               namespaces:
                 items:
                   type: string
                 type: array
-              nodeNumber:
-                description: node number
-                format: int64
-                type: integer
               version:
                 description: kubernetes version
                 properties:
@@ -180,10 +163,6 @@ spec:
                   version:
                     type: string
                 type: object
-              workspaceNumber:
-                description: Workspace number
-                format: int64
-                type: integer
             type: object
         type: object
     served: true

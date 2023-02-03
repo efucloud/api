@@ -166,18 +166,6 @@ message ClusterStatus {
   // encrypted cluster Certificate Authority Data
   // +optional
   optional bytes encryptedCaData = 17;
-
-  // namespace number
-  // +optional
-  optional int64 namespaceNumber = 18;
-
-  // Workspace number
-  // +optional
-  optional int64 workspaceNumber = 19;
-
-  // node number
-  // +optional
-  optional int64 nodeNumber = 20;
 }
 
 // DeployTemplate  specify workspace resource and namespace number,

@@ -68,9 +68,6 @@ var map_ClusterStatus = map[string]string{
 	"encryptedCertData": "encrypted client certificate data",
 	"encryptedKeyData":  "encrypted client key",
 	"encryptedCaData":   "encrypted cluster Certificate Authority Data",
-	"namespaceNumber":   "namespace number",
-	"workspaceNumber":   "Workspace number",
-	"nodeNumber":        "node number",
 }
 
 func (ClusterStatus) SwaggerDoc() map[string]string {
