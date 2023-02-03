@@ -61,7 +61,7 @@ type ClusterSpec struct {
 	// +kubebuilder:validation:Required
 	Category string `json:"category" yaml:"category" protobuf:"bytes,3,opt,name=category"`
 	// authenticated by oidc
-	AuthenticatedOIDC bool `json:"authenticatedOidc" yaml:"authenticatedOidc" protobuf:"varint,4,opt,name=authenticatedOidc"`
+	AuthenticatedSameWithLuffy bool `json:"authenticatedSameWithLuffy" yaml:"authenticatedSameWithLuffy" protobuf:"varint,4,opt,name=authenticatedSameWithLuffy"`
 	// cluster region
 	// +optional
 	Region string `json:"region" yaml:"region" protobuf:"bytes,5,opt,name=region"`

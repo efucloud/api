@@ -99,7 +99,7 @@ message ClusterSpec {
   optional string category = 3;
 
   // authenticated by oidc
-  optional bool authenticatedOidc = 4;
+  optional bool authenticatedSameWithLuffy = 4;
 
   // cluster region
   // +optional

@@ -65,7 +65,7 @@ spec:
             type: object
           spec:
             properties:
-              authenticatedOidc:
+              authenticatedSameWithLuffy:
                 description: authenticated by oidc
                 type: boolean
               caData:
@@ -100,7 +100,7 @@ spec:
                 description: cluster's user or serviceaccount token
                 type: string
             required:
-            - authenticatedOidc
+            - authenticatedSameWithLuffy
             - caData
             - category
             - code
