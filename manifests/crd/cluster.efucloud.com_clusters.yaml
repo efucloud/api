@@ -99,6 +99,9 @@ spec:
               token:
                 description: cluster's user or serviceaccount token
                 type: string
+              userCanCreateNamespace:
+                description: user can create namespace
+                type: boolean
             required:
             - authenticatedSameWithLuffy
             - caData
@@ -106,6 +109,7 @@ spec:
             - code
             - master
             - provider
+            - userCanCreateNamespace
             type: object
           status:
             properties:

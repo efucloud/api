@@ -128,6 +128,9 @@ message ClusterSpec {
   // cluster Certificate Authority Data
   // +kubebuilder:validation:Required
   optional string caData = 11;
+
+  // user can create namespace
+  optional bool userCanCreateNamespace = 12;
 }
 
 message ClusterStatus {
@@ -300,9 +303,11 @@ message WorkspaceSpec {
   optional string code = 1;
 
   // eauth group's account will auto add in workspace
+  // +optional
   repeated string eAuthGroups = 4;
 
   // eauth group's account with prefix will auto add in workspace
+  // +optional
   optional string eAuthGroupPrefix = 5;
 
   // workspace description

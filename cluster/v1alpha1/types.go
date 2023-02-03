@@ -83,6 +83,8 @@ type ClusterSpec struct {
 	// cluster Certificate Authority Data
 	// +kubebuilder:validation:Required
 	CaData string `json:"caData" yaml:"caData" protobuf:"bytes,11,opt,name=caData"`
+	// user can create namespace
+	UserCanCreateNamespace bool `json:"userCanCreateNamespace" yaml:"userCanCreateNamespace" protobuf:"varint,12,opt,name=userCanCreateNamespace"`
 }
 type ClusterStatus struct {
 	// manager cluster, will auto judge
@@ -200,8 +202,10 @@ type WorkspaceSpec struct {
 	// +kubebuilder:validation:Required
 	Code string `json:"code" yaml:"code" protobuf:"bytes,1,opt,name=code"`
 	// eauth group's account will auto add in workspace
+	// +optional
 	EAuthGroups []string `json:"eAuthGroups" yaml:"eAuthGroups" protobuf:"bytes,4,rep,name=eAuthGroups"`
 	// eauth group's account with prefix will auto add in workspace
+	// +optional
 	EAuthGroupPrefix string `json:"eAuthGroupPrefix" yaml:"eAuthGroupPrefix" protobuf:"bytes,5,opt,name=eAuthGroupPrefix"`
 	// workspace description
 	// +kubebuilder:validation:Required

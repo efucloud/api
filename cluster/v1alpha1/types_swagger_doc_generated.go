@@ -55,6 +55,7 @@ var map_ClusterSpec = map[string]string{
 	"certData":                   "client certificate data",
 	"keyData":                    "client key",
 	"caData":                     "cluster Certificate Authority Data",
+	"userCanCreateNamespace":     "user can create namespace",
 }
 
 func (ClusterSpec) SwaggerDoc() map[string]string {
