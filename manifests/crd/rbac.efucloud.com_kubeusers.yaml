@@ -22,9 +22,9 @@ spec:
     - jsonPath: .spec.email
       name: Email
       type: string
-    - jsonPath: .status.enable
-      name: Enable
-      type: boolean
+    - jsonPath: .spec.nickname
+      name: Nickname
+      type: string
     - jsonPath: .status.lastLoginTime
       name: LastLoginTime
       type: string

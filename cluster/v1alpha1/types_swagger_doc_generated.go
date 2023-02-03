@@ -44,17 +44,17 @@ func (ClusterProfile) SwaggerDoc() map[string]string {
 }
 
 var map_ClusterSpec = map[string]string{
-	"code":                 "cluster code",
-	"provider":             "Provider of the cluster: Openshift, Kubernetes, or other cloud providers",
-	"category":             "cluster category, such as: Strict、NonStrict、Dev、Test、Pro",
-	"authenticatedByEAuth": "authenticated by EAuth",
-	"region":               "cluster region",
-	"description":          "\n cluster description",
-	"master":               "cluster master url",
-	"token":                "cluster's user or serviceaccount token",
-	"certData":             "client certificate data",
-	"keyData":              "client key",
-	"caData":               "cluster Certificate Authority Data",
+	"code":              "cluster code",
+	"provider":          "Provider of the cluster: Openshift, Kubernetes, or other cloud providers",
+	"category":          "cluster category, such as: Strict、NonStrict、Dev、Test、Pro",
+	"authenticatedOidc": "authenticated by oidc",
+	"region":            "cluster region",
+	"description":       "\n cluster description",
+	"master":            "cluster master url",
+	"token":             "cluster's user or serviceaccount token",
+	"certData":          "client certificate data",
+	"keyData":           "client key",
+	"caData":            "cluster Certificate Authority Data",
 }
 
 func (ClusterSpec) SwaggerDoc() map[string]string {

@@ -65,8 +65,8 @@ spec:
             type: object
           spec:
             properties:
-              authenticatedByEAuth:
-                description: authenticated by EAuth
+              authenticatedOidc:
+                description: authenticated by oidc
                 type: boolean
               caData:
                 description: cluster Certificate Authority Data
@@ -100,7 +100,7 @@ spec:
                 description: cluster's user or serviceaccount token
                 type: string
             required:
-            - authenticatedByEAuth
+            - authenticatedOidc
             - caData
             - category
             - code

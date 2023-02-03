@@ -98,8 +98,8 @@ message ClusterSpec {
   // +kubebuilder:validation:Required
   optional string category = 3;
 
-  // authenticated by EAuth
-  optional bool authenticatedByEAuth = 4;
+  // authenticated by oidc
+  optional bool authenticatedOidc = 4;
 
   // cluster region
   // +optional

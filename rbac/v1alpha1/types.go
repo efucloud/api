@@ -62,7 +62,7 @@ type WorkspaceRoleList struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="Username",type=string,JSONPath=`.spec.username`
 // +kubebuilder:printcolumn:name="Email",type=string,JSONPath=`.spec.email`
-// +kubebuilder:printcolumn:name="Enable",type=boolean,JSONPath=`.status.enable`
+// +kubebuilder:printcolumn:name="Nickname",type=string,JSONPath=`.spec.nickname`
 // +kubebuilder:printcolumn:name="LastLoginTime",type="string",JSONPath=`.status.lastLoginTime`
 // +kubebuilder:printcolumn:name="LastRemoteIP",type=string,JSONPath=`.status.lastRemoteIP`
 // +kubebuilder:resource:scope=Cluster
@@ -78,7 +78,6 @@ type KubeUserSpec struct {
 	// username
 	// +kubebuilder:validation:Required
 	Username string `json:"username" yaml:"username" protobuf:"bytes,1,opt,name=username"`
-
 	// user email
 	// +optional
 	Email string `json:"email" yaml:"email" protobuf:"bytes,2,opt,name=email"`
