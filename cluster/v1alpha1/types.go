@@ -34,6 +34,7 @@ const (
 // +kubebuilder:printcolumn:name="Healthy",type=string,JSONPath=`.status.healthy`
 // +kubebuilder:printcolumn:name="Manager",type=string,JSONPath=`.status.isManager`
 // +kubebuilder:printcolumn:name="Platform",type=string,JSONPath=`.status.version.platform`
+// +kubebuilder:printcolumn:name="AuthSameWithLuffy",type=string,JSONPath=`.spec.authenticatedSameWithLuffy`
 // +kubebuilder:printcolumn:name="Version",type=string,JSONPath=`.status.version.version`
 // +kubebuilder:printcolumn:name="Category",type=string,JSONPath=`.spec.category`
 // +kubebuilder:printcolumn:name="Namespaces",type=string,JSONPath=`.status.namespaceNumber`

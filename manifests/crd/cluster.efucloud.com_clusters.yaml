@@ -28,6 +28,9 @@ spec:
     - jsonPath: .status.version.platform
       name: Platform
       type: string
+    - jsonPath: .spec.authenticatedSameWithLuffy
+      name: AuthSameWithLuffy
+      type: string
     - jsonPath: .status.version.version
       name: Version
       type: string
