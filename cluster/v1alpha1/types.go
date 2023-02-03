@@ -37,7 +37,9 @@ const (
 // +kubebuilder:printcolumn:name="AuthSameWithLuffy",type=string,JSONPath=`.spec.authenticatedSameWithLuffy`
 // +kubebuilder:printcolumn:name="Version",type=string,JSONPath=`.status.version.version`
 // +kubebuilder:printcolumn:name="Category",type=string,JSONPath=`.spec.category`
-// +kubebuilder:printcolumn:name="Namespaces",type=string,JSONPath=`.status.namespaceNumber`
+// +kubebuilder:printcolumn:name="WorkspaceNumber",type=string,JSONPath=`.status.workspaceNumber`
+// +kubebuilder:printcolumn:name="NamespaceNumber",type=string,JSONPath=`.status.namespaceNumber`
+// +kubebuilder:printcolumn:name="NodeNumber",type=string,JSONPath=`.status.nodeNumber`
 // +kubebuilder:printcolumn:name="LastCheck",type="string",JSONPath=`.status.lastCheck`
 // +kubebuilder:printcolumn:name="Provider",type=string,JSONPath=`.spec.provider`
 // +kubebuilder:printcolumn:name="Region",type=string,JSONPath=`.spec.region`
@@ -112,6 +114,15 @@ type ClusterStatus struct {
 	// encrypted cluster Certificate Authority Data
 	// +optional
 	EncryptedCaData []byte `json:"encryptedCaData" yaml:"encryptedCaData" protobuf:"bytes,17,opt,name=encryptedCaData"`
+	//namespace number
+	// +optional
+	NamespaceNumber int64 `json:"namespaceNumber" yaml:"namespaceNumber" protobuf:"varint,18,opt,name=namespaceNumber"`
+	//Workspace number
+	// +optional
+	WorkspaceNumber int64 `json:"workspaceNumber" yaml:"workspaceNumber" protobuf:"varint,19,opt,name=workspaceNumber"`
+	//node number
+	// +optional
+	NodeNumber int64 `json:"nodeNumber" yaml:"nodeNumber" protobuf:"varint,20,opt,name=nodeNumber"`
 }
 
 type Version struct {
