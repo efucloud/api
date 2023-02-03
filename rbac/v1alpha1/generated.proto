@@ -67,6 +67,10 @@ message KubeUserSpec {
 
   // +optional
   optional string nickname = 7;
+
+  // user has cluster role: cluster-admin
+  // +optional
+  repeated string clusterAdminRefs = 8;
 }
 
 message KubeUserStatus {
@@ -156,11 +160,38 @@ message UserKubeConfigStatus {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.Time lastCheck = 9;
 }
 
+// WorkspaceGroup workspace group
+message WorkspaceGroup {
+  optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
+
+  optional WorkspaceGroupSpec spec = 2;
+
+  optional WorkspaceGroupStatus status = 3;
+}
+
+message WorkspaceGroupSpec {
+  // workspace ref
+  optional string workspaceRef = 1;
+
+  // Description  about workspace role
+  // +kubebuilder:validation:Required
+  optional string description = 2;
+
+  // workspace role refs
+  // +optional
+  repeated string workspaceRoleRefs = 3;
+}
+
+message WorkspaceGroupStatus {
+}
+
 // WorkspaceRole workspace role
 message WorkspaceRole {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
 
   optional WorkspaceRoleSpec spec = 2;
+
+  optional WorkspaceRoleStatus status = 3;
 }
 
 // WorkspaceRoleList contains a list of Workspace
@@ -185,5 +216,21 @@ message WorkspaceRoleSpec {
   // only ref pod's namespace role,  it must have label: efucloud.com/custom
   // +optional
   repeated string roleRefs = 4;
+
+  // workspace space role scope: Cluster,Workspace,if scope is cluster RoleRefs will be ignored
+  // +kubebuilder:validation:Required
+  // +kubebuilder:default:=Workspace
+  // +kubebuilder:validation:Enum:=Cluster;Workspace
+  optional string scope = 5;
+}
+
+message WorkspaceRoleStatus {
+  // rules
+  // +optional
+  repeated k8s.io.api.rbac.v1.PolicyRule rules = 3;
+
+  // status rule and scope hash, not include description, if hash changed will auto sync to cluster
+  // +optional
+  optional string hash = 2;
 }
 

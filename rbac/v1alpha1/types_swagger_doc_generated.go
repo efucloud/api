@@ -44,10 +44,11 @@ func (KubeUserList) SwaggerDoc() map[string]string {
 }
 
 var map_KubeUserSpec = map[string]string{
-	"username": "username",
-	"email":    "user email",
-	"language": "default language",
-	"phone":    "user's mobile phone",
+	"username":         "username",
+	"email":            "user email",
+	"language":         "default language",
+	"phone":            "user's mobile phone",
+	"clusterAdminRefs": "user has cluster role: cluster-admin",
 }
 
 func (KubeUserSpec) SwaggerDoc() map[string]string {
@@ -107,6 +108,24 @@ func (UserKubeConfigStatus) SwaggerDoc() map[string]string {
 	return map_UserKubeConfigStatus
 }
 
+var map_WorkspaceGroup = map[string]string{
+	"": "WorkspaceGroup workspace group",
+}
+
+func (WorkspaceGroup) SwaggerDoc() map[string]string {
+	return map_WorkspaceGroup
+}
+
+var map_WorkspaceGroupSpec = map[string]string{
+	"workspaceRef":      "workspace ref",
+	"description":       "Description  about workspace role",
+	"workspaceRoleRefs": "workspace role refs",
+}
+
+func (WorkspaceGroupSpec) SwaggerDoc() map[string]string {
+	return map_WorkspaceGroupSpec
+}
+
 var map_WorkspaceRole = map[string]string{
 	"": "WorkspaceRole workspace role",
 }
@@ -127,10 +146,20 @@ var map_WorkspaceRoleSpec = map[string]string{
 	"clusterRoleRefs": "ref cluster roles, it must have label: efucloud.com/custom`",
 	"description":     "Description  about workspace role",
 	"roleRefs":        "only ref pod's namespace role,  it must have label: efucloud.com/custom",
+	"scope":           "workspace space role scope: Cluster,Workspace,if scope is cluster RoleRefs will be ignored",
 }
 
 func (WorkspaceRoleSpec) SwaggerDoc() map[string]string {
 	return map_WorkspaceRoleSpec
+}
+
+var map_WorkspaceRoleStatus = map[string]string{
+	"rules": "rules",
+	"hash":  "status rule and scope hash, not include description, if hash changed will auto sync to cluster",
+}
+
+func (WorkspaceRoleStatus) SwaggerDoc() map[string]string {
+	return map_WorkspaceRoleStatus
 }
 
 // AUTO-GENERATED FUNCTIONS END HERE

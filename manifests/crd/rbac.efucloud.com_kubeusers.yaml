@@ -50,6 +50,11 @@ spec:
             type: object
           spec:
             properties:
+              clusterAdminRefs:
+                description: 'user has cluster role: cluster-admin'
+                items:
+                  type: string
+                type: array
               email:
                 description: user email
                 type: string

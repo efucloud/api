@@ -23,7 +23,36 @@ import (
 
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:printcolumn:name="Description",type=string,JSONPath=`.description`
+// +kubebuilder:printcolumn:name="Workspace",type=string,JSONPath=`.spec.workspaceRef`
+// +kubebuilder:printcolumn:name="Description",type=string,JSONPath=`.spec.description`
+// +genclient:nonNamespaced
+// +kubebuilder:resource:scope=Cluster
+
+// WorkspaceGroup workspace group
+type WorkspaceGroup struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Spec              WorkspaceGroupSpec   `json:"spec" yaml:"spec" protobuf:"bytes,2,opt,name=spec"`
+	Status            WorkspaceGroupStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+
+type WorkspaceGroupSpec struct {
+	// workspace ref
+	WorkspaceRef string `json:"workspaceRef" yaml:"workspaceRef" protobuf:"bytes,1,opt,name=workspaceRef"`
+	// Description  about workspace role
+	// +kubebuilder:validation:Required
+	Description string `json:"description" yaml:"description" protobuf:"bytes,2,opt,name=description"`
+	// workspace role refs
+	// +optional
+	WorkspaceRoleRefs []string `json:"workspaceRoleRefs" yaml:"workspaceRoleRefs" protobuf:"bytes,3,rep,name=workspaceRoleRefs"`
+}
+type WorkspaceGroupStatus struct {
+}
+
+// +genclient
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:printcolumn:name="Scope",type=string,JSONPath=`.spec.scope`
+// +kubebuilder:printcolumn:name="Description",type=string,JSONPath=`.spec.description`
 // +genclient:nonNamespaced
 // +kubebuilder:resource:scope=Cluster
 
@@ -31,7 +60,8 @@ import (
 type WorkspaceRole struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Spec              WorkspaceRoleSpec `json:"spec" yaml:"spec" protobuf:"bytes,2,opt,name=spec"`
+	Spec              WorkspaceRoleSpec   `json:"spec" yaml:"spec" protobuf:"bytes,2,opt,name=spec"`
+	Status            WorkspaceRoleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 type WorkspaceRoleSpec struct {
 	// +optional
@@ -45,6 +75,19 @@ type WorkspaceRoleSpec struct {
 	// only ref pod's namespace role,  it must have label: efucloud.com/custom
 	// +optional
 	RoleRefs []string `json:"roleRefs" yaml:"roleRefs" protobuf:"bytes,4,rep,name=roleRefs"`
+	// workspace space role scope: Cluster,Workspace,if scope is cluster RoleRefs will be ignored
+	// +kubebuilder:validation:Required
+	// +kubebuilder:default:=Workspace
+	// +kubebuilder:validation:Enum:=Cluster;Workspace
+	Scope string `json:"scope" yaml:"scope" protobuf:"bytes,5,opt,name=scope"`
+}
+type WorkspaceRoleStatus struct {
+	// rules
+	// +optional
+	Rules []rbacv1.PolicyRule `json:"rules" json:"rules" protobuf:"bytes,3,rep,name=rules"`
+	// status rule and scope hash, not include description, if hash changed will auto sync to cluster
+	// +optional
+	Hash string `json:"hash" yaml:"hash" protobuf:"bytes,2,opt,name=hash"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -92,6 +135,9 @@ type KubeUserSpec struct {
 	Groups []string `json:"groups" yaml:"groups" protobuf:"bytes,6,rep,name=groups"`
 	// +optional
 	Nickname string `json:"nickname" yaml:"nickname" protobuf:"bytes,7,opt,name=nickname"`
+	// user has cluster role: cluster-admin
+	// +optional
+	ClusterAdminRefs []string `json:"clusterAdminRefs" yaml:"clusterAdminRefs" protobuf:"bytes,8,rep,name=clusterAdminRefs"`
 }
 type KubeUserStatus struct {
 	// last login time
