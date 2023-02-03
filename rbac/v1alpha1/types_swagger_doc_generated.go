@@ -56,13 +56,30 @@ func (KubeUserSpec) SwaggerDoc() map[string]string {
 }
 
 var map_KubeUserStatus = map[string]string{
-	"lastLoginTime": "last login time",
-	"lastRemoteIp":  "last login remote ip",
-	"workspaces":    "which workspace belongs to",
+	"workspaces": "which workspace can access",
+	"namespaces": "which namespace can access",
 }
 
 func (KubeUserStatus) SwaggerDoc() map[string]string {
 	return map_KubeUserStatus
+}
+
+var map_UserClusterNamespace = map[string]string{
+	"clusterRef": "cluster name",
+	"namespaces": "namespaces",
+}
+
+func (UserClusterNamespace) SwaggerDoc() map[string]string {
+	return map_UserClusterNamespace
+}
+
+var map_UserClusterWorkspace = map[string]string{
+	"clusterRef": "cluster name",
+	"workspaces": "workspaces",
+}
+
+func (UserClusterWorkspace) SwaggerDoc() map[string]string {
+	return map_UserClusterWorkspace
 }
 
 var map_UserKubeConfig = map[string]string{

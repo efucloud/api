@@ -74,17 +74,29 @@ message KubeUserSpec {
 }
 
 message KubeUserStatus {
-  // last login time
+  // which workspace can access
   // +optional
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.Time lastLoginTime = 1;
+  repeated UserClusterWorkspace workspaces = 1;
 
-  // last login remote ip
+  // which namespace can access
   // +optional
-  optional string lastRemoteIp = 2;
+  repeated UserClusterNamespace namespaces = 2;
+}
 
-  // which workspace belongs to
-  // +optional
-  repeated string workspaces = 3;
+message UserClusterNamespace {
+  // cluster name
+  optional string clusterRef = 1;
+
+  // namespaces
+  repeated string namespaces = 2;
+}
+
+message UserClusterWorkspace {
+  // cluster name
+  optional string clusterRef = 1;
+
+  // workspaces
+  repeated string workspaces = 2;
 }
 
 // UserKubeConfig is the Schema for the usermanages API

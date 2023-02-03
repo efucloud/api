@@ -81,17 +81,39 @@ spec:
             type: object
           status:
             properties:
-              lastLoginTime:
-                description: last login time
-                format: date-time
-                type: string
-              lastRemoteIp:
-                description: last login remote ip
-                type: string
-              workspaces:
-                description: which workspace belongs to
+              namespaces:
+                description: which namespace can access
                 items:
-                  type: string
+                  properties:
+                    clusterRef:
+                      description: cluster name
+                      type: string
+                    namespaces:
+                      description: namespaces
+                      items:
+                        type: string
+                      type: array
+                  required:
+                  - clusterRef
+                  - namespaces
+                  type: object
+                type: array
+              workspaces:
+                description: which workspace can access
+                items:
+                  properties:
+                    clusterRef:
+                      description: cluster name
+                      type: string
+                    workspaces:
+                      description: workspaces
+                      items:
+                        type: string
+                      type: array
+                  required:
+                  - clusterRef
+                  - workspaces
+                  type: object
                 type: array
             type: object
         type: object

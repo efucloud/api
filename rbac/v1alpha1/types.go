@@ -149,15 +149,24 @@ type KubeUserSpec struct {
 	ClusterAdminRefs []string `json:"clusterAdminRefs" yaml:"clusterAdminRefs" protobuf:"bytes,8,rep,name=clusterAdminRefs"`
 }
 type KubeUserStatus struct {
-	// last login time
+	// which workspace can access
 	// +optional
-	LastLoginTime *metav1.Time `json:"lastLoginTime" yaml:"lastLoginTime" protobuf:"bytes,1,opt,name=lastLoginTime"`
-	// last login remote ip
+	Workspaces []UserClusterWorkspace `json:"workspaces" yaml:"workspaces" protobuf:"bytes,1,rep,name=workspaces"`
+	// which namespace can access
 	// +optional
-	LastRemoteIP string `json:"lastRemoteIp" yaml:"lastRemoteIp" protobuf:"bytes,2,opt,name=lastRemoteIp"`
-	// which workspace belongs to
-	// +optional
-	Workspaces []string `json:"workspaces" yaml:"workspaces" protobuf:"bytes,3,rep,name=workspaces"`
+	Namespaces []UserClusterNamespace `json:"namespaces" yaml:"namespaces" protobuf:"bytes,2,rep,name=namespaces"`
+}
+type UserClusterNamespace struct {
+	// cluster name
+	ClusterRef string `json:"clusterRef" yaml:"clusterRef" protobuf:"bytes,1,opt,name=clusterRef"`
+	// namespaces
+	Namespaces []string `json:"namespaces" yaml:"namespaces" protobuf:"bytes,2,rep,name=namespaces"`
+}
+type UserClusterWorkspace struct {
+	// cluster name
+	ClusterRef string `json:"clusterRef" yaml:"clusterRef" protobuf:"bytes,1,opt,name=clusterRef"`
+	// workspaces
+	Workspaces []string `json:"workspaces" yaml:"workspaces" protobuf:"bytes,2,rep,name=workspaces"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
