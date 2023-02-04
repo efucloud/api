@@ -121,6 +121,8 @@ var map_UserKubeConfigSpec = map[string]string{
 	"expiredTime":           "expire time",
 	"clientCertificateData": "user ClientCertificateData if content is raw data will auto base64 encode is csr.Status.Certificate",
 	"clientKeyData":         "user ClientKeyData if content is raw data will auto base64 encode csr private key",
+	"username":              "username",
+	"email":                 "email",
 }
 
 func (UserKubeConfigSpec) SwaggerDoc() map[string]string {

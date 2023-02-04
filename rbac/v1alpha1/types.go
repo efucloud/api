@@ -271,6 +271,12 @@ type UserKubeConfigSpec struct {
 	// user ClientKeyData if content is raw data will auto base64 encode
 	// csr private key
 	ClientKeyData string `json:"clientKeyData" yaml:"clientKeyData" protobuf:"bytes,6,opt,name=clientKeyData"`
+	// username
+	// +optional
+	Username string `json:"username" yaml:"username" protobuf:"bytes,7,opt,name=username"`
+	// email
+	// +optional
+	Email string `json:"email" yaml:"email" protobuf:"bytes,8,opt,name=email"`
 }
 
 // UserKubeConfigStatus defines the observed state of UserKubeConfig

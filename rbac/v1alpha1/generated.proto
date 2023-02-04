@@ -175,6 +175,14 @@ message UserKubeConfigSpec {
   // user ClientKeyData if content is raw data will auto base64 encode
   // csr private key
   optional string clientKeyData = 6;
+
+  // username
+  // +optional
+  optional string username = 7;
+
+  // email
+  // +optional
+  optional string email = 8;
 }
 
 // UserKubeConfigStatus defines the observed state of UserKubeConfig
