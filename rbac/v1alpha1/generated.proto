@@ -150,10 +150,12 @@ message UserKubeConfigSpec {
 
   // user ClientCertificateData if content is raw data will auto base64 encode
   // is csr.Status.Certificate
+  // +optional
   optional string clientCertificateData = 5;
 
   // user ClientKeyData if content is raw data will auto base64 encode
   // csr private key
+  // +optional
   optional string clientKeyData = 6;
 
   // username

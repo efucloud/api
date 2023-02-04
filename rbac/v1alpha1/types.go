@@ -252,9 +252,11 @@ type UserKubeConfigSpec struct {
 	ExpiredTime *metav1.Time `json:"expiredTime" yaml:"expiredTime" protobuf:"bytes,3,opt,name=expiredTime"`
 	// user ClientCertificateData if content is raw data will auto base64 encode
 	// is csr.Status.Certificate
+	// +optional
 	ClientCertificateData string `json:"clientCertificateData" yaml:"clientCertificateData" protobuf:"bytes,5,opt,name=clientCertificateData"`
 	// user ClientKeyData if content is raw data will auto base64 encode
 	// csr private key
+	// +optional
 	ClientKeyData string `json:"clientKeyData" yaml:"clientKeyData" protobuf:"bytes,6,opt,name=clientKeyData"`
 	// username
 	// +optional
