@@ -144,9 +144,12 @@ type KubeUserSpec struct {
 	Groups []string `json:"groups" yaml:"groups" protobuf:"bytes,6,rep,name=groups"`
 	// +optional
 	Nickname string `json:"nickname" yaml:"nickname" protobuf:"bytes,7,opt,name=nickname"`
-	// user has cluster role: cluster-admin
+	// user has cluster role: efu-cloud-cluster-admin
 	// +optional
 	ClusterAdminRefs []string `json:"clusterAdminRefs" yaml:"clusterAdminRefs" protobuf:"bytes,8,rep,name=clusterAdminRefs"`
+	// user has cluster role: efu-cloud-cluster-view
+	// +optional
+	ClusterViewRefs []string `json:"clusterViewRefs" yaml:"clusterViewRefs" protobuf:"bytes,9,rep,name=clusterViewRefs"`
 }
 type KubeUserStatus struct {
 	// which workspace can access
@@ -155,12 +158,30 @@ type KubeUserStatus struct {
 	// which namespace can access
 	// +optional
 	Namespaces []UserClusterNamespace `json:"namespaces" yaml:"namespaces" protobuf:"bytes,2,rep,name=namespaces"`
+	// Certificate request errors
+	// +optional
+	CertificateErrors []KubeUserCertificateSigningRequest `json:"certificateErrors" yaml:"certificateErrors" protobuf:"bytes,3,rep,name=certificateErrors"`
+}
+
+type KubeUserCertificateSigningRequest struct {
+	// cluster name
+	ClusterRef string `json:"clusterRef" yaml:"clusterRef" protobuf:"bytes,1,opt,name=clusterRef"`
+	// kubeUser config
+	KubeUserConfigRef string `json:"kubeUserConfigRef" yaml:"kubeUserConfigRef" protobuf:"bytes,2,opt,name=kubeUserConfigRef"`
+	// +kubebuilder:validation:Enum=Approved;Denied;Failed;Waiting;Created;Received
+	Status string `json:"status" yaml:"status" protobuf:"bytes,3,opt,name=status"`
+	// +optional
+	Reason string `json:"reason" yaml:"reason" protobuf:"bytes,4,opt,name=reason"`
 }
 type UserClusterNamespace struct {
 	// cluster name
 	ClusterRef string `json:"clusterRef" yaml:"clusterRef" protobuf:"bytes,1,opt,name=clusterRef"`
 	// namespaces
+	// +optional
 	Namespaces []string `json:"namespaces" yaml:"namespaces" protobuf:"bytes,2,rep,name=namespaces"`
+	// all namespace
+	// +optional
+	AllNamespace bool `json:"allNamespace" yaml:"allNamespace" protobuf:"varint,3,opt,name=allNamespace"`
 }
 type UserClusterWorkspace struct {
 	// cluster name

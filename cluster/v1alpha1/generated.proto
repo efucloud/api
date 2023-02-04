@@ -130,6 +130,7 @@ message ClusterSpec {
   optional string caData = 11;
 
   // user can create namespace
+  // +optional
   optional bool userCanCreateNamespace = 12;
 }
 

@@ -51,7 +51,12 @@ spec:
           spec:
             properties:
               clusterAdminRefs:
-                description: 'user has cluster role: cluster-admin'
+                description: 'user has cluster role: efu-cloud-cluster-admin'
+                items:
+                  type: string
+                type: array
+              clusterViewRefs:
+                description: 'user has cluster role: efu-cloud-cluster-view'
                 items:
                   type: string
                 type: array
@@ -81,10 +86,40 @@ spec:
             type: object
           status:
             properties:
+              certificateErrors:
+                description: Certificate request errors
+                items:
+                  properties:
+                    clusterRef:
+                      description: cluster name
+                      type: string
+                    kubeUserConfigRef:
+                      description: kubeUser config
+                      type: string
+                    reason:
+                      type: string
+                    status:
+                      enum:
+                      - Approved
+                      - Denied
+                      - Failed
+                      - Waiting
+                      - Created
+                      - Received
+                      type: string
+                  required:
+                  - clusterRef
+                  - kubeUserConfigRef
+                  - status
+                  type: object
+                type: array
               namespaces:
                 description: which namespace can access
                 items:
                   properties:
+                    allNamespace:
+                      description: all namespace
+                      type: boolean
                     clusterRef:
                       description: cluster name
                       type: string
@@ -95,7 +130,6 @@ spec:
                       type: array
                   required:
                   - clusterRef
-                  - namespaces
                   type: object
                 type: array
               workspaces:

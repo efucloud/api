@@ -109,7 +109,6 @@ spec:
             - code
             - master
             - provider
-            - userCanCreateNamespace
             type: object
           status:
             properties:

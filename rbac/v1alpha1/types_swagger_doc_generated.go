@@ -35,6 +35,15 @@ func (KubeUser) SwaggerDoc() map[string]string {
 	return map_KubeUser
 }
 
+var map_KubeUserCertificateSigningRequest = map[string]string{
+	"clusterRef":        "cluster name",
+	"kubeUserConfigRef": "kubeUser config",
+}
+
+func (KubeUserCertificateSigningRequest) SwaggerDoc() map[string]string {
+	return map_KubeUserCertificateSigningRequest
+}
+
 var map_KubeUserList = map[string]string{
 	"": "KubeUserList contains a list of KubeUser",
 }
@@ -48,7 +57,8 @@ var map_KubeUserSpec = map[string]string{
 	"email":            "user email",
 	"language":         "default language",
 	"phone":            "user's mobile phone",
-	"clusterAdminRefs": "user has cluster role: cluster-admin",
+	"clusterAdminRefs": "user has cluster role: efu-cloud-cluster-admin",
+	"clusterViewRefs":  "user has cluster role: efu-cloud-cluster-view",
 }
 
 func (KubeUserSpec) SwaggerDoc() map[string]string {
@@ -56,8 +66,9 @@ func (KubeUserSpec) SwaggerDoc() map[string]string {
 }
 
 var map_KubeUserStatus = map[string]string{
-	"workspaces": "which workspace can access",
-	"namespaces": "which namespace can access",
+	"workspaces":        "which workspace can access",
+	"namespaces":        "which namespace can access",
+	"certificateErrors": "Certificate request errors",
 }
 
 func (KubeUserStatus) SwaggerDoc() map[string]string {
@@ -65,8 +76,9 @@ func (KubeUserStatus) SwaggerDoc() map[string]string {
 }
 
 var map_UserClusterNamespace = map[string]string{
-	"clusterRef": "cluster name",
-	"namespaces": "namespaces",
+	"clusterRef":   "cluster name",
+	"namespaces":   "namespaces",
+	"allNamespace": "all namespace",
 }
 
 func (UserClusterNamespace) SwaggerDoc() map[string]string {

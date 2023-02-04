@@ -37,6 +37,20 @@ message KubeUser {
   optional KubeUserStatus status = 3;
 }
 
+message KubeUserCertificateSigningRequest {
+  // cluster name
+  optional string clusterRef = 1;
+
+  // kubeUser config
+  optional string kubeUserConfigRef = 2;
+
+  // +kubebuilder:validation:Enum=Approved;Denied;Failed;Waiting;Created;Received
+  optional string status = 3;
+
+  // +optional
+  optional string reason = 4;
+}
+
 // KubeUserList contains a list of KubeUser
 message KubeUserList {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
@@ -68,9 +82,13 @@ message KubeUserSpec {
   // +optional
   optional string nickname = 7;
 
-  // user has cluster role: cluster-admin
+  // user has cluster role: efu-cloud-cluster-admin
   // +optional
   repeated string clusterAdminRefs = 8;
+
+  // user has cluster role: efu-cloud-cluster-view
+  // +optional
+  repeated string clusterViewRefs = 9;
 }
 
 message KubeUserStatus {
@@ -81,6 +99,10 @@ message KubeUserStatus {
   // which namespace can access
   // +optional
   repeated UserClusterNamespace namespaces = 2;
+
+  // Certificate request errors
+  // +optional
+  repeated KubeUserCertificateSigningRequest certificateErrors = 3;
 }
 
 message UserClusterNamespace {
@@ -88,7 +110,12 @@ message UserClusterNamespace {
   optional string clusterRef = 1;
 
   // namespaces
+  // +optional
   repeated string namespaces = 2;
+
+  // all namespace
+  // +optional
+  optional bool allNamespace = 3;
 }
 
 message UserClusterWorkspace {
