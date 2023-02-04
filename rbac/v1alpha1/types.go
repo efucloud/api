@@ -150,6 +150,12 @@ type KubeUserSpec struct {
 	// +optional
 	ClusterViewRefs []string `json:"clusterViewRefs" yaml:"clusterViewRefs" protobuf:"bytes,9,rep,name=clusterViewRefs"`
 }
+
+const (
+	KubeUserEnable  = "Enable"
+	KubeUserDisable = "Disable"
+)
+
 type KubeUserStatus struct {
 	// status
 	// +kubebuilder:validation:Enum=Enable;Disable
