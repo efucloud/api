@@ -205,6 +205,7 @@ type KubeUserList struct {
 // +genclient:nonNamespaced
 // +kubebuilder:printcolumn:name="KubeUserRef",type=string,JSONPath=`.spec.kubeUserRef`
 // +kubebuilder:printcolumn:name="ClusterRef",type=string,JSONPath=`.spec.clusterRef`
+// +kubebuilder:printcolumn:name="Email",type=string,JSONPath=`.spec.email`
 // +kubebuilder:printcolumn:name="Available",type=boolean,JSONPath=`.status.available`
 // +kubebuilder:printcolumn:name="ExpiredTime",type=string,JSONPath=`.spec.expiredTime`
 // +kubebuilder:printcolumn:name="LastCheck",type="string",JSONPath=`.status.lastCheck`
