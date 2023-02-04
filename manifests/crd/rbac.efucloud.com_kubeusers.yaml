@@ -16,6 +16,9 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
+    - jsonPath: .status.status
+      name: Status
+      type: string
     - jsonPath: .spec.username
       name: Username
       type: string
@@ -24,9 +27,6 @@ spec:
       type: string
     - jsonPath: .spec.nickname
       name: Nickname
-      type: string
-    - jsonPath: .status.status
-      name: Status
       type: string
     name: v1alpha1
     schema:

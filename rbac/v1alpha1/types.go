@@ -112,10 +112,10 @@ type WorkspaceRoleList struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:subresource:status
+// +kubebuilder:printcolumn:name="Status",type="string",JSONPath=`.status.status`
 // +kubebuilder:printcolumn:name="Username",type=string,JSONPath=`.spec.username`
 // +kubebuilder:printcolumn:name="Email",type=string,JSONPath=`.spec.email`
 // +kubebuilder:printcolumn:name="Nickname",type=string,JSONPath=`.spec.nickname`
-// +kubebuilder:printcolumn:name="Status",type="string",JSONPath=`.status.status`
 // +kubebuilder:resource:scope=Cluster
 
 //KubeUser luffy user and name's suffix is eauth account id
