@@ -169,12 +169,12 @@ message UserKubeConfigSpec {
 
 // UserKubeConfigStatus defines the observed state of UserKubeConfig
 message UserKubeConfigStatus {
-  // if true, app can use kubeconfig connect with cluster
-  // +optional
+  // if true, can use kubeconfig connect with cluster
   // +kubebuilder:default:=true
   optional bool available = 2;
 
   // Only one condition of a given type is allowed.
+  // +kubebuilder:default:=Waiting
   optional string type = 3;
 
   // ref  cluster's CertificateSigningRequest

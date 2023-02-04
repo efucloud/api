@@ -205,7 +205,6 @@ type KubeUserList struct {
 // +genclient:nonNamespaced
 // +kubebuilder:printcolumn:name="KubeUserRef",type=string,JSONPath=`.spec.kubeUserRef`
 // +kubebuilder:printcolumn:name="ClusterRef",type=string,JSONPath=`.spec.clusterRef`
-// +kubebuilder:printcolumn:name="Enable",type=boolean,JSONPath=`.status.enable`
 // +kubebuilder:printcolumn:name="Available",type=boolean,JSONPath=`.status.available`
 // +kubebuilder:printcolumn:name="ExpiredTime",type=string,JSONPath=`.spec.expiredTime`
 // +kubebuilder:printcolumn:name="LastCheck",type="string",JSONPath=`.status.lastCheck`
@@ -268,11 +267,11 @@ type UserKubeConfigSpec struct {
 
 // UserKubeConfigStatus defines the observed state of UserKubeConfig
 type UserKubeConfigStatus struct {
-	// if true, app can use kubeconfig connect with cluster
-	// +optional
+	// if true, can use kubeconfig connect with cluster
 	// +kubebuilder:default:=true
 	Available bool `json:"available" yaml:"available" protobuf:"varint,2,opt,name=available"`
 	// Only one condition of a given type is allowed.
+	// +kubebuilder:default:=Waiting
 	Type RequestConditionType `json:"type" yaml:"type" protobuf:"bytes,3,opt,name=type,casttype=RequestConditionType"`
 	//ref  cluster's CertificateSigningRequest
 	// +optional

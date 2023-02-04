@@ -119,7 +119,7 @@ func (UserKubeConfigSpec) SwaggerDoc() map[string]string {
 
 var map_UserKubeConfigStatus = map[string]string{
 	"":                               "UserKubeConfigStatus defines the observed state of UserKubeConfig",
-	"available":                      "if true, app can use kubeconfig connect with cluster",
+	"available":                      "if true, can use kubeconfig connect with cluster",
 	"type":                           "Only one condition of a given type is allowed.",
 	"csrRef":                         "ref  cluster's CertificateSigningRequest",
 	"encryptedClientCertificateData": "user ClientCertificateData if content is raw data will auto base64 encode",
