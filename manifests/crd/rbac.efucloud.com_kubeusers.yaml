@@ -25,11 +25,8 @@ spec:
     - jsonPath: .spec.nickname
       name: Nickname
       type: string
-    - jsonPath: .status.lastLoginTime
-      name: LastLoginTime
-      type: string
-    - jsonPath: .status.lastRemoteIP
-      name: LastRemoteIP
+    - jsonPath: .status.status
+      name: Status
       type: string
     name: v1alpha1
     schema:

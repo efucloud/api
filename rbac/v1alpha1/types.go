@@ -115,8 +115,7 @@ type WorkspaceRoleList struct {
 // +kubebuilder:printcolumn:name="Username",type=string,JSONPath=`.spec.username`
 // +kubebuilder:printcolumn:name="Email",type=string,JSONPath=`.spec.email`
 // +kubebuilder:printcolumn:name="Nickname",type=string,JSONPath=`.spec.nickname`
-// +kubebuilder:printcolumn:name="LastLoginTime",type="string",JSONPath=`.status.lastLoginTime`
-// +kubebuilder:printcolumn:name="LastRemoteIP",type=string,JSONPath=`.status.lastRemoteIP`
+// +kubebuilder:printcolumn:name="Status",type="string",JSONPath=`.status.status`
 // +kubebuilder:resource:scope=Cluster
 
 //KubeUser luffy user and name's suffix is eauth account id
