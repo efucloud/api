@@ -266,10 +266,6 @@ type UserKubeConfigSpec struct {
 
 // UserKubeConfigStatus defines the observed state of UserKubeConfig
 type UserKubeConfigStatus struct {
-	// if false app will not use this kubeconfig although available is true
-	// +optional
-	// +kubebuilder:default:=true
-	Enable bool `json:"enable" yaml:"enable" protobuf:"varint,1,opt,name=enable"`
 	// if true, app can use kubeconfig connect with cluster
 	// +optional
 	// +kubebuilder:default:=true

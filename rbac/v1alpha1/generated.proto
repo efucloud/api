@@ -167,11 +167,6 @@ message UserKubeConfigSpec {
 
 // UserKubeConfigStatus defines the observed state of UserKubeConfig
 message UserKubeConfigStatus {
-  // if false app will not use this kubeconfig although available is true
-  // +optional
-  // +kubebuilder:default:=true
-  optional bool enable = 1;
-
   // if true, app can use kubeconfig connect with cluster
   // +optional
   // +kubebuilder:default:=true
