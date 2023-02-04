@@ -38,6 +38,8 @@ func (KubeUser) SwaggerDoc() map[string]string {
 var map_KubeUserCertificateSigningRequest = map[string]string{
 	"clusterRef":        "cluster name",
 	"kubeUserConfigRef": "kubeUser config",
+	"status":            "request status",
+	"reason":            "faield reason",
 }
 
 func (KubeUserCertificateSigningRequest) SwaggerDoc() map[string]string {
@@ -66,6 +68,8 @@ func (KubeUserSpec) SwaggerDoc() map[string]string {
 }
 
 var map_KubeUserStatus = map[string]string{
+	"status":            "status",
+	"reason":            "reason",
 	"workspaces":        "which workspace can access",
 	"namespaces":        "which namespace can access",
 	"certificateErrors": "Certificate request errors",

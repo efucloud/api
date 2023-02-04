@@ -152,15 +152,23 @@ type KubeUserSpec struct {
 	ClusterViewRefs []string `json:"clusterViewRefs" yaml:"clusterViewRefs" protobuf:"bytes,9,rep,name=clusterViewRefs"`
 }
 type KubeUserStatus struct {
+	// status
+	// +kubebuilder:validation:Enum=Enable;Disable
+	// +kubebuilder:default:=Enable
+	// +optional
+	Status string `json:"status" yaml:"status" protobuf:"bytes,1,opt,name=status"`
+	// reason
+	// +optional
+	Reason string `json:"reason" yaml:"reason" protobuf:"bytes,2,opt,name=reason"`
 	// which workspace can access
 	// +optional
-	Workspaces []UserClusterWorkspace `json:"workspaces" yaml:"workspaces" protobuf:"bytes,1,rep,name=workspaces"`
+	Workspaces []UserClusterWorkspace `json:"workspaces" yaml:"workspaces" protobuf:"bytes,3,rep,name=workspaces"`
 	// which namespace can access
 	// +optional
-	Namespaces []UserClusterNamespace `json:"namespaces" yaml:"namespaces" protobuf:"bytes,2,rep,name=namespaces"`
+	Namespaces []UserClusterNamespace `json:"namespaces" yaml:"namespaces" protobuf:"bytes,4,rep,name=namespaces"`
 	// Certificate request errors
 	// +optional
-	CertificateErrors []KubeUserCertificateSigningRequest `json:"certificateErrors" yaml:"certificateErrors" protobuf:"bytes,3,rep,name=certificateErrors"`
+	CertificateErrors []KubeUserCertificateSigningRequest `json:"certificateErrors" yaml:"certificateErrors" protobuf:"bytes,5,rep,name=certificateErrors"`
 }
 
 type KubeUserCertificateSigningRequest struct {
@@ -168,8 +176,10 @@ type KubeUserCertificateSigningRequest struct {
 	ClusterRef string `json:"clusterRef" yaml:"clusterRef" protobuf:"bytes,1,opt,name=clusterRef"`
 	// kubeUser config
 	KubeUserConfigRef string `json:"kubeUserConfigRef" yaml:"kubeUserConfigRef" protobuf:"bytes,2,opt,name=kubeUserConfigRef"`
+	//request status
 	// +kubebuilder:validation:Enum=Approved;Denied;Failed;Waiting;Created;Received
 	Status string `json:"status" yaml:"status" protobuf:"bytes,3,opt,name=status"`
+	//faield reason
 	// +optional
 	Reason string `json:"reason" yaml:"reason" protobuf:"bytes,4,opt,name=reason"`
 }

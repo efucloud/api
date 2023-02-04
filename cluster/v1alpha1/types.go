@@ -84,6 +84,7 @@ type ClusterSpec struct {
 	// +kubebuilder:validation:Required
 	CaData string `json:"caData" yaml:"caData" protobuf:"bytes,11,opt,name=caData"`
 	// user can create namespace
+	// +kubebuilder:default:=false
 	// +optional
 	UserCanCreateNamespace bool `json:"userCanCreateNamespace" yaml:"userCanCreateNamespace" protobuf:"varint,12,opt,name=userCanCreateNamespace"`
 }

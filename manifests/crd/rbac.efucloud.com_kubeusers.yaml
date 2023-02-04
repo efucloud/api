@@ -97,8 +97,10 @@ spec:
                       description: kubeUser config
                       type: string
                     reason:
+                      description: faield reason
                       type: string
                     status:
+                      description: request status
                       enum:
                       - Approved
                       - Denied
@@ -132,6 +134,16 @@ spec:
                   - clusterRef
                   type: object
                 type: array
+              reason:
+                description: reason
+                type: string
+              status:
+                default: Enable
+                description: status
+                enum:
+                - Enable
+                - Disable
+                type: string
               workspaces:
                 description: which workspace can access
                 items:
