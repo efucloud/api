@@ -171,23 +171,8 @@ type KubeUserStatus struct {
 	// which namespace can access
 	// +optional
 	Namespaces []UserClusterNamespace `json:"namespaces" yaml:"namespaces" protobuf:"bytes,4,rep,name=namespaces"`
-	// Certificate request errors
-	// +optional
-	CertificateErrors []KubeUserCertificateSigningRequest `json:"certificateErrors" yaml:"certificateErrors" protobuf:"bytes,5,rep,name=certificateErrors"`
 }
 
-type KubeUserCertificateSigningRequest struct {
-	// cluster name
-	ClusterRef string `json:"clusterRef" yaml:"clusterRef" protobuf:"bytes,1,opt,name=clusterRef"`
-	// kubeUser config
-	KubeUserConfigRef string `json:"kubeUserConfigRef" yaml:"kubeUserConfigRef" protobuf:"bytes,2,opt,name=kubeUserConfigRef"`
-	//request status
-	// +kubebuilder:validation:Enum=Approved;Denied;Failed;Waiting;Created;Received
-	Status string `json:"status" yaml:"status" protobuf:"bytes,3,opt,name=status"`
-	//faield reason
-	// +optional
-	Reason string `json:"reason" yaml:"reason" protobuf:"bytes,4,opt,name=reason"`
-}
 type UserClusterNamespace struct {
 	// cluster name
 	ClusterRef string `json:"clusterRef" yaml:"clusterRef" protobuf:"bytes,1,opt,name=clusterRef"`

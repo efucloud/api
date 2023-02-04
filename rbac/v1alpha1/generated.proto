@@ -37,22 +37,6 @@ message KubeUser {
   optional KubeUserStatus status = 3;
 }
 
-message KubeUserCertificateSigningRequest {
-  // cluster name
-  optional string clusterRef = 1;
-
-  // kubeUser config
-  optional string kubeUserConfigRef = 2;
-
-  // request status
-  // +kubebuilder:validation:Enum=Approved;Denied;Failed;Waiting;Created;Received
-  optional string status = 3;
-
-  // faield reason
-  // +optional
-  optional string reason = 4;
-}
-
 // KubeUserList contains a list of KubeUser
 message KubeUserList {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
@@ -111,10 +95,6 @@ message KubeUserStatus {
   // which namespace can access
   // +optional
   repeated UserClusterNamespace namespaces = 4;
-
-  // Certificate request errors
-  // +optional
-  repeated KubeUserCertificateSigningRequest certificateErrors = 5;
 }
 
 message UserClusterNamespace {

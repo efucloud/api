@@ -35,17 +35,6 @@ func (KubeUser) SwaggerDoc() map[string]string {
 	return map_KubeUser
 }
 
-var map_KubeUserCertificateSigningRequest = map[string]string{
-	"clusterRef":        "cluster name",
-	"kubeUserConfigRef": "kubeUser config",
-	"status":            "request status",
-	"reason":            "faield reason",
-}
-
-func (KubeUserCertificateSigningRequest) SwaggerDoc() map[string]string {
-	return map_KubeUserCertificateSigningRequest
-}
-
 var map_KubeUserList = map[string]string{
 	"": "KubeUserList contains a list of KubeUser",
 }
@@ -68,11 +57,10 @@ func (KubeUserSpec) SwaggerDoc() map[string]string {
 }
 
 var map_KubeUserStatus = map[string]string{
-	"status":            "status",
-	"reason":            "reason",
-	"workspaces":        "which workspace can access",
-	"namespaces":        "which namespace can access",
-	"certificateErrors": "Certificate request errors",
+	"status":     "status",
+	"reason":     "reason",
+	"workspaces": "which workspace can access",
+	"namespaces": "which namespace can access",
 }
 
 func (KubeUserStatus) SwaggerDoc() map[string]string {

@@ -83,35 +83,6 @@ spec:
             type: object
           status:
             properties:
-              certificateErrors:
-                description: Certificate request errors
-                items:
-                  properties:
-                    clusterRef:
-                      description: cluster name
-                      type: string
-                    kubeUserConfigRef:
-                      description: kubeUser config
-                      type: string
-                    reason:
-                      description: faield reason
-                      type: string
-                    status:
-                      description: request status
-                      enum:
-                      - Approved
-                      - Denied
-                      - Failed
-                      - Waiting
-                      - Created
-                      - Received
-                      type: string
-                  required:
-                  - clusterRef
-                  - kubeUserConfigRef
-                  - status
-                  type: object
-                type: array
               namespaces:
                 description: which namespace can access
                 items:
