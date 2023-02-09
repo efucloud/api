@@ -207,10 +207,6 @@ message ClusterWorkspaceSpec {
   // workspace description
   // +kubebuilder:validation:Required
   optional string description = 2;
-
-  // workspace users
-  // +optional
-  repeated WorkspaceUser users = 3;
 }
 
 // DeployTemplate  specify workspace resource and namespace number,
@@ -321,10 +317,6 @@ message WorkspaceSpec {
   // workspace description
   // +kubebuilder:validation:Required
   optional string description = 2;
-
-  // workspace users
-  // +optional
-  repeated WorkspaceUser users = 3;
 }
 
 // WorkspaceStatus defines the observed state of Workspace
@@ -336,15 +328,5 @@ message WorkspaceStatus {
   // all namespaces
   // +optional
   repeated string namespaces = 2;
-}
-
-message WorkspaceUser {
-  // ref kubeuser
-  // +kubebuilder:validation:Required
-  optional string userRef = 1;
-
-  // ref workspace role
-  // +optional
-  repeated string workspaceRoles = 2;
 }
 

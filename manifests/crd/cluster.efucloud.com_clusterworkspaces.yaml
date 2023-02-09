@@ -55,22 +55,6 @@ spec:
                 items:
                   type: string
                 type: array
-              users:
-                description: workspace users
-                items:
-                  properties:
-                    userRef:
-                      description: ref kubeuser
-                      type: string
-                    workspaceRoles:
-                      description: ref workspace role
-                      items:
-                        type: string
-                      type: array
-                  required:
-                  - userRef
-                  type: object
-                type: array
             required:
             - code
             - description

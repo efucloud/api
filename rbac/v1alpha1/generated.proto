@@ -21,7 +21,6 @@ syntax = "proto2";
 
 package github.com.efucloud.api.rbac.v1alpha1;
 
-import "k8s.io/api/rbac/v1/generated.proto";
 import "k8s.io/apimachinery/pkg/apis/meta/v1/generated.proto";
 import "k8s.io/apimachinery/pkg/runtime/schema/generated.proto";
 
@@ -223,6 +222,10 @@ message WorkspaceGroupSpec {
   // workspace role refs
   // +optional
   repeated string workspaceRoleRefs = 3;
+
+  // workspace group users, item is kubeuser name
+  // +optional
+  repeated string userRefs = 4;
 }
 
 message WorkspaceGroupStatus {
@@ -245,9 +248,6 @@ message WorkspaceRoleList {
 }
 
 message WorkspaceRoleSpec {
-  // +optional
-  repeated k8s.io.api.rbac.v1.PolicyRule rules = 1;
-
   // ref cluster roles, it must have label: efucloud.com/custom`
   // +optional
   repeated string clusterRoleRefs = 2;
@@ -259,19 +259,9 @@ message WorkspaceRoleSpec {
   // only ref pod's namespace role,  it must have label: efucloud.com/custom
   // +optional
   repeated string roleRefs = 4;
-
-  // workspace space role scope: Cluster,Workspace,if scope is cluster RoleRefs will be ignored
-  // +kubebuilder:validation:Required
-  // +kubebuilder:default:=Workspace
-  // +kubebuilder:validation:Enum:=Cluster;Workspace
-  optional string scope = 5;
 }
 
 message WorkspaceRoleStatus {
-  // rules
-  // +optional
-  repeated k8s.io.api.rbac.v1.PolicyRule rules = 3;
-
   // status rule and scope hash, not include description, if hash changed will auto sync to cluster
   // +optional
   optional string hash = 2;

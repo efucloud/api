@@ -97,7 +97,6 @@ func (ClusterWorkspaceList) SwaggerDoc() map[string]string {
 var map_ClusterWorkspaceSpec = map[string]string{
 	"code":        "workspace code",
 	"description": "workspace description",
-	"users":       "workspace users",
 }
 
 func (ClusterWorkspaceSpec) SwaggerDoc() map[string]string {
@@ -141,7 +140,6 @@ var map_WorkspaceSpec = map[string]string{
 	"eAuthGroups":      "eauth group's account will auto add in workspace",
 	"eAuthGroupPrefix": "eauth group's account with prefix will auto add in workspace",
 	"description":      "workspace description",
-	"users":            "workspace users",
 }
 
 func (WorkspaceSpec) SwaggerDoc() map[string]string {
@@ -156,15 +154,6 @@ var map_WorkspaceStatus = map[string]string{
 
 func (WorkspaceStatus) SwaggerDoc() map[string]string {
 	return map_WorkspaceStatus
-}
-
-var map_WorkspaceUser = map[string]string{
-	"userRef":        "ref kubeuser",
-	"workspaceRoles": "ref workspace role",
-}
-
-func (WorkspaceUser) SwaggerDoc() map[string]string {
-	return map_WorkspaceUser
 }
 
 // AUTO-GENERATED FUNCTIONS END HERE

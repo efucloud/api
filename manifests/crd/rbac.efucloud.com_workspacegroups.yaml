@@ -44,6 +44,11 @@ spec:
               description:
                 description: Description  about workspace role
                 type: string
+              userRefs:
+                description: workspace group users, item is kubeuser name
+                items:
+                  type: string
+                type: array
               workspaceRef:
                 description: workspace ref
                 type: string

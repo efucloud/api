@@ -17,7 +17,6 @@ limitations under the License.
 package v1alpha1
 
 import (
-	rbacv1 "k8s.io/api/rbac/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -45,6 +44,9 @@ type WorkspaceGroupSpec struct {
 	// workspace role refs
 	// +optional
 	WorkspaceRoleRefs []string `json:"workspaceRoleRefs" yaml:"workspaceRoleRefs" protobuf:"bytes,3,rep,name=workspaceRoleRefs"`
+	// workspace group users, item is kubeuser name
+	// +optional
+	UserRefs []string `json:"userRefs" yaml:"userRefs" protobuf:"bytes,4,rep,name=userRefs"`
 }
 type WorkspaceGroupStatus struct {
 }
@@ -64,8 +66,6 @@ type WorkspaceRole struct {
 	Status            WorkspaceRoleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 type WorkspaceRoleSpec struct {
-	// +optional
-	Rules []rbacv1.PolicyRule `json:"rules" yaml:"rules" protobuf:"bytes,1,rep,name=rules"`
 	//ref cluster roles, it must have label: efucloud.com/custom`
 	// +optional
 	ClusterRoleRefs []string `json:"clusterRoleRefs" yaml:"clusterRoleRefs" protobuf:"bytes,2,rep,name=clusterRoleRefs"`
@@ -75,16 +75,8 @@ type WorkspaceRoleSpec struct {
 	// only ref pod's namespace role,  it must have label: efucloud.com/custom
 	// +optional
 	RoleRefs []string `json:"roleRefs" yaml:"roleRefs" protobuf:"bytes,4,rep,name=roleRefs"`
-	// workspace space role scope: Cluster,Workspace,if scope is cluster RoleRefs will be ignored
-	// +kubebuilder:validation:Required
-	// +kubebuilder:default:=Workspace
-	// +kubebuilder:validation:Enum:=Cluster;Workspace
-	Scope string `json:"scope" yaml:"scope" protobuf:"bytes,5,opt,name=scope"`
 }
 type WorkspaceRoleStatus struct {
-	// rules
-	// +optional
-	Rules []rbacv1.PolicyRule `json:"rules" json:"rules" protobuf:"bytes,3,rep,name=rules"`
 	// status rule and scope hash, not include description, if hash changed will auto sync to cluster
 	// +optional
 	Hash string `json:"hash" yaml:"hash" protobuf:"bytes,2,opt,name=hash"`
@@ -150,11 +142,6 @@ type KubeUserSpec struct {
 	// +optional
 	ClusterViewRefs []string `json:"clusterViewRefs" yaml:"clusterViewRefs" protobuf:"bytes,9,rep,name=clusterViewRefs"`
 }
-
-const (
-	KubeUserEnable  = "Enable"
-	KubeUserDisable = "Disable"
-)
 
 type KubeUserStatus struct {
 	// status

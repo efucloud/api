@@ -150,6 +150,7 @@ var map_WorkspaceGroupSpec = map[string]string{
 	"workspaceRef":      "workspace ref",
 	"description":       "Description  about workspace role",
 	"workspaceRoleRefs": "workspace role refs",
+	"userRefs":          "workspace group users, item is kubeuser name",
 }
 
 func (WorkspaceGroupSpec) SwaggerDoc() map[string]string {
@@ -176,7 +177,6 @@ var map_WorkspaceRoleSpec = map[string]string{
 	"clusterRoleRefs": "ref cluster roles, it must have label: efucloud.com/custom`",
 	"description":     "Description  about workspace role",
 	"roleRefs":        "only ref pod's namespace role,  it must have label: efucloud.com/custom",
-	"scope":           "workspace space role scope: Cluster,Workspace,if scope is cluster RoleRefs will be ignored",
 }
 
 func (WorkspaceRoleSpec) SwaggerDoc() map[string]string {
@@ -184,8 +184,7 @@ func (WorkspaceRoleSpec) SwaggerDoc() map[string]string {
 }
 
 var map_WorkspaceRoleStatus = map[string]string{
-	"rules": "rules",
-	"hash":  "status rule and scope hash, not include description, if hash changed will auto sync to cluster",
+	"hash": "status rule and scope hash, not include description, if hash changed will auto sync to cluster",
 }
 
 func (WorkspaceRoleStatus) SwaggerDoc() map[string]string {

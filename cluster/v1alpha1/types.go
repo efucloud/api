@@ -220,18 +220,6 @@ type WorkspaceSpec struct {
 	// workspace description
 	// +kubebuilder:validation:Required
 	Description string `json:"description" yaml:"description" protobuf:"bytes,2,opt,name=description"`
-	// workspace users
-	// +optional
-	Users []WorkspaceUser `json:"users" yaml:"users" protobuf:"bytes,3,rep,name=users"`
-}
-
-type WorkspaceUser struct {
-	// ref kubeuser
-	// +kubebuilder:validation:Required
-	UserRef string `json:"userRef" yaml:"userRef" protobuf:"bytes,1,opt,name=userRef"`
-	// ref workspace role
-	// +optional
-	WorkspaceRoles []string `json:"workspaceRoles" yaml:"workspaceRoles" protobuf:"bytes,2,rep,name=workspaceRoles"`
 }
 
 // WorkspaceStatus defines the observed state of Workspace
@@ -281,9 +269,6 @@ type ClusterWorkspaceSpec struct {
 	// workspace description
 	// +kubebuilder:validation:Required
 	Description string `json:"description" yaml:"description" protobuf:"bytes,2,opt,name=description"`
-	// workspace users
-	// +optional
-	Users []WorkspaceUser `json:"users" yaml:"users" protobuf:"bytes,3,rep,name=users"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
