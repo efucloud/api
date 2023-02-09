@@ -65,6 +65,9 @@ spec:
             type: object
           spec:
             properties:
+              agentToken:
+                description: agent token
+                type: string
               authenticatedSameWithLuffy:
                 description: authenticated by oidc
                 type: boolean
@@ -82,6 +85,9 @@ spec:
                 type: string
               description:
                 description: cluster description
+                type: string
+              efuCloudAppImagePrefix:
+                description: if not empty, luffy will auto deploy efucloud agent application
                 type: string
               keyData:
                 description: client key
@@ -113,6 +119,10 @@ spec:
             type: object
           status:
             properties:
+              encryptedAgentToken:
+                description: encrypted agent token
+                format: byte
+                type: string
               encryptedCaData:
                 description: encrypted cluster Certificate Authority Data
                 format: byte

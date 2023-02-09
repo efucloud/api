@@ -17,7 +17,6 @@ limitations under the License.
 package v1alpha1
 
 import (
-	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -87,6 +86,12 @@ type ClusterSpec struct {
 	// +kubebuilder:default:=false
 	// +optional
 	UserCanCreateNamespace bool `json:"userCanCreateNamespace" yaml:"userCanCreateNamespace" protobuf:"varint,12,opt,name=userCanCreateNamespace"`
+	// agent token
+	// +optional
+	AgentToken string `json:"agentToken" yaml:"agentToken" protobuf:"bytes,13,opt,name=agentToken"`
+	// if not empty, luffy will auto deploy efucloud agent application
+	// +optional
+	EfuCloudAppImagePrefix string `json:"efuCloudAppImagePrefix" yaml:"efuCloudAppImagePrefix" protobuf:"bytes,14,opt,name=efuCloudAppImagePrefix"`
 }
 type ClusterStatus struct {
 	// manager cluster, will auto judge
@@ -115,6 +120,9 @@ type ClusterStatus struct {
 	// encrypted cluster Certificate Authority Data
 	// +optional
 	EncryptedCaData []byte `json:"encryptedCaData" yaml:"encryptedCaData" protobuf:"bytes,17,opt,name=encryptedCaData"`
+	// encrypted agent token
+	// +optional
+	EncryptedAgentToken []byte `json:"encryptedAgentToken" yaml:"encryptedAgentToken" protobuf:"bytes,18,opt,name=encryptedAgentToken"`
 }
 
 type Version struct {
@@ -192,7 +200,7 @@ type ClusterProfileList struct {
 // +kubebuilder:printcolumn:name="Cascade Delete",type=string,JSONPath=`.spec.cascadeDelete`
 // +kubebuilder:resource:scope=Cluster
 
-// Workspace is the Schema for the namespace groups API, use workspace name as namespace label value
+// Workspace only exist on manager cluster
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
@@ -216,6 +224,7 @@ type WorkspaceSpec struct {
 	// +optional
 	Users []WorkspaceUser `json:"users" yaml:"users" protobuf:"bytes,3,rep,name=users"`
 }
+
 type WorkspaceUser struct {
 	// ref kubeuser
 	// +kubebuilder:validation:Required
@@ -253,39 +262,37 @@ type WorkspaceList struct {
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:printcolumn:name="Workspace",type=string,JSONPath=`.spec.workspaceRef`
 // +kubebuilder:subresource:status
+// +kubebuilder:printcolumn:name="Code",type=string,JSONPath=`.spec.code`
+// +kubebuilder:printcolumn:name="Cascade Delete",type=string,JSONPath=`.spec.cascadeDelete`
 // +kubebuilder:resource:scope=Cluster
 
-// WorkspaceResourceQuota  specify workspace resource and namespace number,
-type WorkspaceResourceQuota struct {
+// ClusterWorkspace will save on member cluster
+type ClusterWorkspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Spec              WorkspaceResourceQuotaSpec   `json:"spec" yaml:"spec" protobuf:"bytes,2,opt,name=spec"`
-	Status            WorkspaceResourceQuotaStatus `json:"status" yaml:"status" protobuf:"bytes,3,opt,name=status"`
+	Spec              WorkspaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            WorkspaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
-type WorkspaceResourceQuotaSpec struct {
-	// WorkspaceRef is equal WorkspaceResourceQuota name
+type ClusterWorkspaceSpec struct {
+	// workspace code
 	// +kubebuilder:validation:Required
-	WorkspaceRef string `json:"workspaceRef" yaml:"workspaceRef" protobuf:"bytes,1,opt,name=workspaceRef"`
+	Code string `json:"code" yaml:"code" protobuf:"bytes,1,opt,name=code"`
+	// workspace description
+	// +kubebuilder:validation:Required
+	Description string `json:"description" yaml:"description" protobuf:"bytes,2,opt,name=description"`
+	// workspace users
 	// +optional
-	Hard            v1.ResourceList `json:"hard" yaml:"hard" protobuf:"bytes,2,rep,name=hard,casttype=k8s.io/api/core/v1.ResourceList,castkey=k8s.io/api/core/v1.ResourceName"`
-	NamespaceNumber int64           `json:"namespaceNumber" yaml:"namespaceNumber" protobuf:"varint,3,opt,name=namespaceNumber"`
-	// namespace can be created in cluster
-	// +kubebuilder:validation:Required
-	ClusterSelector *metav1.LabelSelector `json:"clusterSelector" yaml:"clusterSelector" protobuf:"bytes,4,opt,name=clusterSelector"`
-}
-
-type WorkspaceResourceQuotaStatus struct {
+	Users []WorkspaceUser `json:"users" yaml:"users" protobuf:"bytes,3,rep,name=users"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-//WorkspaceResourceQuotaList contains a list of Config
-type WorkspaceResourceQuotaList struct {
+// ClusterWorkspaceList contains a list of Workspace
+type ClusterWorkspaceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Items           []WorkspaceResourceQuota `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items           []ClusterWorkspace `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
 type Parameter struct {

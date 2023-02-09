@@ -21,8 +21,6 @@ syntax = "proto2";
 
 package github.com.efucloud.api.cluster.v1alpha1;
 
-import "k8s.io/api/core/v1/generated.proto";
-import "k8s.io/apimachinery/pkg/api/resource/generated.proto";
 import "k8s.io/apimachinery/pkg/apis/meta/v1/generated.proto";
 import "k8s.io/apimachinery/pkg/runtime/generated.proto";
 import "k8s.io/apimachinery/pkg/runtime/schema/generated.proto";
@@ -133,6 +131,14 @@ message ClusterSpec {
   // +kubebuilder:default:=false
   // +optional
   optional bool userCanCreateNamespace = 12;
+
+  // agent token
+  // +optional
+  optional string agentToken = 13;
+
+  // if not empty, luffy will auto deploy efucloud agent application
+  // +optional
+  optional string efuCloudAppImagePrefix = 14;
 }
 
 message ClusterStatus {
@@ -171,6 +177,40 @@ message ClusterStatus {
   // encrypted cluster Certificate Authority Data
   // +optional
   optional bytes encryptedCaData = 17;
+
+  // encrypted agent token
+  // +optional
+  optional bytes encryptedAgentToken = 18;
+}
+
+// ClusterWorkspace will save on member cluster
+message ClusterWorkspace {
+  optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
+
+  optional WorkspaceSpec spec = 2;
+
+  optional WorkspaceStatus status = 3;
+}
+
+// ClusterWorkspaceList contains a list of Workspace
+message ClusterWorkspaceList {
+  optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
+
+  repeated ClusterWorkspace items = 2;
+}
+
+message ClusterWorkspaceSpec {
+  // workspace code
+  // +kubebuilder:validation:Required
+  optional string code = 1;
+
+  // workspace description
+  // +kubebuilder:validation:Required
+  optional string description = 2;
+
+  // workspace users
+  // +optional
+  repeated WorkspaceUser users = 3;
 }
 
 // DeployTemplate  specify workspace resource and namespace number,
@@ -249,7 +289,7 @@ message Version {
   optional string version = 10;
 }
 
-// Workspace is the Schema for the namespace groups API, use workspace name as namespace label value
+// Workspace only exist on manager cluster
 message Workspace {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
 
@@ -263,40 +303,6 @@ message WorkspaceList {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
 
   repeated Workspace items = 2;
-}
-
-// WorkspaceResourceQuota  specify workspace resource and namespace number,
-message WorkspaceResourceQuota {
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
-
-  optional WorkspaceResourceQuotaSpec spec = 2;
-
-  optional WorkspaceResourceQuotaStatus status = 3;
-}
-
-// WorkspaceResourceQuotaList contains a list of Config
-message WorkspaceResourceQuotaList {
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
-
-  repeated WorkspaceResourceQuota items = 2;
-}
-
-message WorkspaceResourceQuotaSpec {
-  // WorkspaceRef is equal WorkspaceResourceQuota name
-  // +kubebuilder:validation:Required
-  optional string workspaceRef = 1;
-
-  // +optional
-  map<string, k8s.io.apimachinery.pkg.api.resource.Quantity> hard = 2;
-
-  optional int64 namespaceNumber = 3;
-
-  // namespace can be created in cluster
-  // +kubebuilder:validation:Required
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.LabelSelector clusterSelector = 4;
-}
-
-message WorkspaceResourceQuotaStatus {
 }
 
 message WorkspaceSpec {

@@ -56,6 +56,8 @@ var map_ClusterSpec = map[string]string{
 	"keyData":                    "client key",
 	"caData":                     "cluster Certificate Authority Data",
 	"userCanCreateNamespace":     "user can create namespace",
+	"agentToken":                 "agent token",
+	"efuCloudAppImagePrefix":     "if not empty, luffy will auto deploy efucloud agent application",
 }
 
 func (ClusterSpec) SwaggerDoc() map[string]string {
@@ -63,16 +65,43 @@ func (ClusterSpec) SwaggerDoc() map[string]string {
 }
 
 var map_ClusterStatus = map[string]string{
-	"isManager":         "manager cluster, will auto judge",
-	"version":           "kubernetes version",
-	"encryptedToken":    "cluster sa token",
-	"encryptedCertData": "encrypted client certificate data",
-	"encryptedKeyData":  "encrypted client key",
-	"encryptedCaData":   "encrypted cluster Certificate Authority Data",
+	"isManager":           "manager cluster, will auto judge",
+	"version":             "kubernetes version",
+	"encryptedToken":      "cluster sa token",
+	"encryptedCertData":   "encrypted client certificate data",
+	"encryptedKeyData":    "encrypted client key",
+	"encryptedCaData":     "encrypted cluster Certificate Authority Data",
+	"encryptedAgentToken": "encrypted agent token",
 }
 
 func (ClusterStatus) SwaggerDoc() map[string]string {
 	return map_ClusterStatus
+}
+
+var map_ClusterWorkspace = map[string]string{
+	"": "ClusterWorkspace will save on member cluster",
+}
+
+func (ClusterWorkspace) SwaggerDoc() map[string]string {
+	return map_ClusterWorkspace
+}
+
+var map_ClusterWorkspaceList = map[string]string{
+	"": "ClusterWorkspaceList contains a list of Workspace",
+}
+
+func (ClusterWorkspaceList) SwaggerDoc() map[string]string {
+	return map_ClusterWorkspaceList
+}
+
+var map_ClusterWorkspaceSpec = map[string]string{
+	"code":        "workspace code",
+	"description": "workspace description",
+	"users":       "workspace users",
+}
+
+func (ClusterWorkspaceSpec) SwaggerDoc() map[string]string {
+	return map_ClusterWorkspaceSpec
 }
 
 var map_DeployTemplate = map[string]string{
@@ -92,7 +121,7 @@ func (DeployTemplateList) SwaggerDoc() map[string]string {
 }
 
 var map_Workspace = map[string]string{
-	"": "Workspace is the Schema for the namespace groups API, use workspace name as namespace label value",
+	"": "Workspace only exist on manager cluster",
 }
 
 func (Workspace) SwaggerDoc() map[string]string {
@@ -105,31 +134,6 @@ var map_WorkspaceList = map[string]string{
 
 func (WorkspaceList) SwaggerDoc() map[string]string {
 	return map_WorkspaceList
-}
-
-var map_WorkspaceResourceQuota = map[string]string{
-	"": "WorkspaceResourceQuota  specify workspace resource and namespace number,",
-}
-
-func (WorkspaceResourceQuota) SwaggerDoc() map[string]string {
-	return map_WorkspaceResourceQuota
-}
-
-var map_WorkspaceResourceQuotaList = map[string]string{
-	"": "WorkspaceResourceQuotaList contains a list of Config",
-}
-
-func (WorkspaceResourceQuotaList) SwaggerDoc() map[string]string {
-	return map_WorkspaceResourceQuotaList
-}
-
-var map_WorkspaceResourceQuotaSpec = map[string]string{
-	"workspaceRef":    "WorkspaceRef is equal WorkspaceResourceQuota name",
-	"clusterSelector": "namespace can be created in cluster",
-}
-
-func (WorkspaceResourceQuotaSpec) SwaggerDoc() map[string]string {
-	return map_WorkspaceResourceQuotaSpec
 }
 
 var map_WorkspaceSpec = map[string]string{
