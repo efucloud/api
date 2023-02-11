@@ -16,11 +16,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
+    - jsonPath: .spec.workspaceRef
+      name: Workspace
+      type: string
     - jsonPath: .spec.code
       name: Code
-      type: string
-    - jsonPath: .spec.cascadeDelete
-      name: Cascade Delete
       type: string
     name: v1alpha1
     schema:
@@ -47,36 +47,17 @@ spec:
               description:
                 description: workspace description
                 type: string
-              eAuthGroupPrefix:
-                description: eauth group's account with prefix will auto add in workspace
+              workspaceRef:
+                description: workspace name
                 type: string
-              eAuthGroups:
-                description: eauth group's account will auto add in workspace
-                items:
-                  type: string
-                type: array
             required:
             - code
             - description
+            - workspaceRef
             type: object
           status:
-            description: WorkspaceStatus defines the observed state of Workspace
+            description: ClusterWorkspaceStatus defines the observed state of Workspace
             properties:
-              clusterNamespaces:
-                description: cluster's namespaces
-                items:
-                  properties:
-                    cluster:
-                      type: string
-                    namespaces:
-                      items:
-                        type: string
-                      type: array
-                  required:
-                  - cluster
-                  - namespaces
-                  type: object
-                type: array
               namespaces:
                 description: all namespaces
                 items:

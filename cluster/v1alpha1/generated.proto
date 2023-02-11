@@ -187,9 +187,9 @@ message ClusterStatus {
 message ClusterWorkspace {
   optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
 
-  optional WorkspaceSpec spec = 2;
+  optional ClusterWorkspaceSpec spec = 2;
 
-  optional WorkspaceStatus status = 3;
+  optional ClusterWorkspaceStatus status = 3;
 }
 
 // ClusterWorkspaceList contains a list of Workspace
@@ -200,6 +200,10 @@ message ClusterWorkspaceList {
 }
 
 message ClusterWorkspaceSpec {
+  // workspace name
+  // +kubebuilder:validation:Required
+  optional string workspaceRef = 3;
+
   // workspace code
   // +kubebuilder:validation:Required
   optional string code = 1;
@@ -207,6 +211,13 @@ message ClusterWorkspaceSpec {
   // workspace description
   // +kubebuilder:validation:Required
   optional string description = 2;
+}
+
+// ClusterWorkspaceStatus defines the observed state of Workspace
+message ClusterWorkspaceStatus {
+  // all namespaces
+  // +optional
+  repeated string namespaces = 2;
 }
 
 // DeployTemplate  specify workspace resource and namespace number,

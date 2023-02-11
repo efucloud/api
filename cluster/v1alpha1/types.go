@@ -251,24 +251,34 @@ type WorkspaceList struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:subresource:status
+// +kubebuilder:printcolumn:name="Workspace",type=string,JSONPath=`.spec.workspaceRef`
 // +kubebuilder:printcolumn:name="Code",type=string,JSONPath=`.spec.code`
-// +kubebuilder:printcolumn:name="Cascade Delete",type=string,JSONPath=`.spec.cascadeDelete`
 // +kubebuilder:resource:scope=Cluster
 
 // ClusterWorkspace will save on member cluster
 type ClusterWorkspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Spec              WorkspaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
-	Status            WorkspaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+	Spec              ClusterWorkspaceSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status            ClusterWorkspaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 type ClusterWorkspaceSpec struct {
+	// workspace name
+	// +kubebuilder:validation:Required
+	WorkspaceRef string `json:"workspaceRef" yaml:"workspaceRef" protobuf:"bytes,3,opt,name=workspaceRef"`
 	// workspace code
 	// +kubebuilder:validation:Required
 	Code string `json:"code" yaml:"code" protobuf:"bytes,1,opt,name=code"`
 	// workspace description
 	// +kubebuilder:validation:Required
 	Description string `json:"description" yaml:"description" protobuf:"bytes,2,opt,name=description"`
+}
+
+// ClusterWorkspaceStatus defines the observed state of Workspace
+type ClusterWorkspaceStatus struct {
+	// all namespaces
+	// +optional
+	Namespaces []string `json:"namespaces" yaml:"namespaces" protobuf:"bytes,2,rep,name=namespaces"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

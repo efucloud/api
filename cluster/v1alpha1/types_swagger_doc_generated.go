@@ -95,12 +95,22 @@ func (ClusterWorkspaceList) SwaggerDoc() map[string]string {
 }
 
 var map_ClusterWorkspaceSpec = map[string]string{
-	"code":        "workspace code",
-	"description": "workspace description",
+	"workspaceRef": "workspace name",
+	"code":         "workspace code",
+	"description":  "workspace description",
 }
 
 func (ClusterWorkspaceSpec) SwaggerDoc() map[string]string {
 	return map_ClusterWorkspaceSpec
+}
+
+var map_ClusterWorkspaceStatus = map[string]string{
+	"":           "ClusterWorkspaceStatus defines the observed state of Workspace",
+	"namespaces": "all namespaces",
+}
+
+func (ClusterWorkspaceStatus) SwaggerDoc() map[string]string {
+	return map_ClusterWorkspaceStatus
 }
 
 var map_DeployTemplate = map[string]string{
