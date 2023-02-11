@@ -66,13 +66,13 @@ type WorkspaceRole struct {
 	Status            WorkspaceRoleStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 type WorkspaceRoleSpec struct {
-	//ref cluster roles, it must have label: efucloud.com/custom`
+	//ref cluster roles, it must have label: `
 	// +optional
 	ClusterRoleRefs []string `json:"clusterRoleRefs" yaml:"clusterRoleRefs" protobuf:"bytes,2,rep,name=clusterRoleRefs"`
 	// Description  about workspace role
 	// +kubebuilder:validation:Required
 	Description string `json:"description" yaml:"description" protobuf:"bytes,3,opt,name=description"`
-	// only ref pod's namespace role,  it must have label: efucloud.com/custom
+	// only ref pod's namespace role,  it must have label:
 	// +optional
 	RoleRefs []string `json:"roleRefs" yaml:"roleRefs" protobuf:"bytes,4,rep,name=roleRefs"`
 }
