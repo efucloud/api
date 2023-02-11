@@ -205,11 +205,11 @@ message ClusterWorkspaceSpec {
   optional string workspaceRef = 3;
 
   // workspace code
-  // +kubebuilder:validation:Required
+  // +optional
   optional string code = 1;
 
   // workspace description
-  // +kubebuilder:validation:Required
+  // +optional
   optional string description = 2;
 }
 

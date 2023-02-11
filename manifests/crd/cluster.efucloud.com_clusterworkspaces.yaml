@@ -51,8 +51,6 @@ spec:
                 description: workspace name
                 type: string
             required:
-            - code
-            - description
             - workspaceRef
             type: object
           status:

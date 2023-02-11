@@ -267,10 +267,10 @@ type ClusterWorkspaceSpec struct {
 	// +kubebuilder:validation:Required
 	WorkspaceRef string `json:"workspaceRef" yaml:"workspaceRef" protobuf:"bytes,3,opt,name=workspaceRef"`
 	// workspace code
-	// +kubebuilder:validation:Required
+	// +optional
 	Code string `json:"code" yaml:"code" protobuf:"bytes,1,opt,name=code"`
 	// workspace description
-	// +kubebuilder:validation:Required
+	// +optional
 	Description string `json:"description" yaml:"description" protobuf:"bytes,2,opt,name=description"`
 }
 
