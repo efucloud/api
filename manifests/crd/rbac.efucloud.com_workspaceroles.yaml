@@ -42,7 +42,7 @@ spec:
           spec:
             properties:
               clusterRoleRefs:
-                description: 'ref cluster roles, it must have label: efucloud.com/custom`'
+                description: 'ref cluster roles, it must have label: `'
                 items:
                   type: string
                 type: array
@@ -50,8 +50,7 @@ spec:
                 description: Description  about workspace role
                 type: string
               roleRefs:
-                description: 'only ref pod''s namespace role,  it must have label:
-                  efucloud.com/custom'
+                description: 'only ref pod''s namespace role,  it must have label:'
                 items:
                   type: string
                 type: array

@@ -176,7 +176,7 @@ func (WorkspaceRoleList) SwaggerDoc() map[string]string {
 var map_WorkspaceRoleSpec = map[string]string{
 	"clusterRoleRefs": "ref cluster roles, it must have label: `",
 	"description":     "Description  about workspace role",
-	"roleRefs":        "only ref pod's namespace role,  it must have label: ",
+	"roleRefs":        "only ref pod's namespace role,  it must have label:",
 }
 
 func (WorkspaceRoleSpec) SwaggerDoc() map[string]string {

@@ -110,7 +110,7 @@ type WorkspaceRoleList struct {
 // +kubebuilder:printcolumn:name="Nickname",type=string,JSONPath=`.spec.nickname`
 // +kubebuilder:resource:scope=Cluster
 
-//KubeUser luffy user and name's suffix is eauth account id
+// KubeUser luffy user and name's suffix is eauth account id
 type KubeUser struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`

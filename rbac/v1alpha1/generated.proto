@@ -248,7 +248,7 @@ message WorkspaceRoleList {
 }
 
 message WorkspaceRoleSpec {
-  // ref cluster roles, it must have label: efucloud.com/custom`
+  // ref cluster roles, it must have label: `
   // +optional
   repeated string clusterRoleRefs = 2;
 
@@ -256,7 +256,7 @@ message WorkspaceRoleSpec {
   // +kubebuilder:validation:Required
   optional string description = 3;
 
-  // only ref pod's namespace role,  it must have label: efucloud.com/custom
+  // only ref pod's namespace role,  it must have label:
   // +optional
   repeated string roleRefs = 4;
 }

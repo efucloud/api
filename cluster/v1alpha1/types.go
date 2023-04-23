@@ -326,7 +326,7 @@ type DeployTemplate struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-//DeployTemplateList contains a list of Config
+// DeployTemplateList contains a list of Config
 type DeployTemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`

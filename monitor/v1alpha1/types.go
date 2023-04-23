@@ -177,7 +177,7 @@ type ServiceMetricsStatus struct {
 	Items map[string]ServiceItemStatus `json:"items,omitempty" protobuf:"bytes,1,rep,name=items"`
 }
 
-//ServiceItemStatus one service version metrics
+// ServiceItemStatus one service version metrics
 type ServiceItemStatus struct {
 	// key is metrics name
 	Metrics map[string]ServiceItemMetricsStatus `json:"metrics,omitempty" protobuf:"bytes,1,rep,name=metrics"`
@@ -359,7 +359,7 @@ type DashboardMetricsValue struct {
 // +kubebuilder:printcolumn:name="Timestamp",type="string",JSONPath=`.status.timestamp`
 // +kubebuilder:resource:scope=Namespaced
 
-//Workload workload
+// Workload workload
 type Workload struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`

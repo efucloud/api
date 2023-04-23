@@ -1,6 +1,6 @@
 module github.com/efucloud/api
 
-go 1.18
+go 1.20
 
 require (
 	github.com/gogo/protobuf v1.3.2
