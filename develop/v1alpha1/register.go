@@ -49,6 +49,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(GroupVersion,
 		&CoderVirt{},
 		&CoderVirtList{},
+		&CoderTemplate{},
+		&CoderTemplateList{},
 	)
 	metav1.AddToGroupVersion(scheme, GroupVersion)
 	return nil

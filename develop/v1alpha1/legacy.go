@@ -32,6 +32,8 @@ func addLegacyKnownTypes(scheme *runtime.Scheme) error {
 	types := []runtime.Object{
 		&CoderVirt{},
 		&CoderVirtList{},
+		&CoderTemplate{},
+		&CoderTemplateList{},
 	}
 	scheme.AddKnownTypes(legacyGroupVersion, types...)
 	return nil

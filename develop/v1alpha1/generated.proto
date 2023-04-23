@@ -21,11 +21,51 @@ syntax = "proto2";
 
 package github.com.efucloud.api.develop.v1alpha1;
 
+import "k8s.io/api/core/v1/generated.proto";
 import "k8s.io/apimachinery/pkg/apis/meta/v1/generated.proto";
 import "k8s.io/apimachinery/pkg/runtime/schema/generated.proto";
 
 // Package-wide variables from generator "generated".
 option go_package = "github.com/efucloud/api/develop/v1alpha1";
+
+// CoderTemplate is the Schema for the CoderTemplates API
+message CoderTemplate {
+  optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
+
+  optional CoderTemplateSpec spec = 2;
+
+  optional CoderTemplateStatus status = 3;
+}
+
+// CoderTemplateList contains a list of CoderTemplate
+message CoderTemplateList {
+  optional k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;
+
+  repeated CoderTemplate items = 2;
+}
+
+// CoderTemplateSpec defines the desired state of CoderTemplate
+message CoderTemplateSpec {
+  // template name
+  optional string name = 1;
+
+  // template description
+  optional string description = 2;
+
+  // template' image author
+  optional string author = 3;
+
+  // template language
+  // +kubebuilder:validation:Enum=golang;java;python;ruby;rust
+  optional string language = 4;
+
+  // template containers
+  repeated k8s.io.api.core.v1.Container containers = 5;
+}
+
+// CoderTemplateStatus defines the observed state of CoderTemplate
+message CoderTemplateStatus {
+}
 
 // CoderVirt is the Schema for the CoderVirts API
 message CoderVirt {
@@ -45,6 +85,12 @@ message CoderVirtList {
 
 // CoderVirtSpec defines the desired state of CoderVirt
 message CoderVirtSpec {
+  optional bool running = 1;
+
+  // +kubebuilder:validation:Enum=golang;java;python;ruby;rust
+  optional string language = 2;
+
+  optional string templateRef = 3;
 }
 
 // CoderVirtStatus defines the observed state of CoderVirt
