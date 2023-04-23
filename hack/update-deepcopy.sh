@@ -10,6 +10,6 @@ verify="${VERIFY:-}"
 ${CODEGEN_PKG}/generate-groups.sh "deepcopy" \
   github.com/efucloud/api/generated \
   github.com/efucloud/api \
-  "cluster:v1alpha1 monitor:v1alpha1 rbac:v1alpha1"  \
+  "cluster:v1alpha1 monitor:v1alpha1 rbac:v1alpha1 develop:v1alpha1"  \
   --go-header-file ${SCRIPT_ROOT}/hack/boilerplate.txt \
   ${verify}

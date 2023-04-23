@@ -9,7 +9,7 @@ CODEGEN_PKG=${CODEGEN_PKG:-$(cd ${SCRIPT_ROOT}; ls -d -1 ./vendor/k8s.io/code-ge
 
 verify="${VERIFY:-}"
 
-for group in cluster monitor rbac; do
+for group in cluster monitor rbac develop; do
   ${CODEGEN_PKG}/generate-groups.sh "client,lister,informer" \
     github.com/efucloud/client-go/${group} \
     github.com/efucloud/api \

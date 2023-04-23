@@ -13,9 +13,11 @@ API_GROUP_VERSIONS="\
 cluster/v1alpha1 \
 monitor/v1alpha1 \
 rbac/v1alpha1 \
+develop/v1alpha1 \
 "
 API_PACKAGES="\
 github.com/efucloud/api/cluster/v1alpha1,\
 github.com/efucloud/api/monitor/v1alpha1,\
 github.com/efucloud/api/rbac/v1alpha1,\
+github.com/efucloud/api/develop/v1alpha1,\
 "
